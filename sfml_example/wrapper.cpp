@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "../SFML/include/SFML/Graphics.hpp"
 #include <iostream>
 
 extern "C" void	createCircle(sf::CircleShape* circle) {

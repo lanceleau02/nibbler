@@ -1,15 +1,20 @@
-CC		=	clang++
-CFLAGS	=	-Wall -Wextra -Werror
-LDFLAGS	=	-lsfml-graphics -lsfml-window -lsfml-system -ldl
-BINS	=	wrapper.so main.elf
+CC				=	clang++
+CFLAGS			=	-Wall -Wextra -Werror
+LDFLAGS			=	-L ../SFML/lib -lsfml-graphics -lsfml-window -lsfml-system -ldl
+SFML_INCLUDE	=	-I ../SFML/include
+BINS			=	wrapper.so main.elf
 
 all: $(BINS)
 
 %.so: %.cpp
-	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) -fPIC -shared -o $@ $^ $(SFML_INCLUDE) $(LDFLAGS)
 
 %.elf: %.cpp
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^ $(SFML_INCLUDE) $(LDFLAGS)
 
 clean:
 	rm $(BINS)
+
+run:
+	export LD_LIBRARY_PATH=../SFML/lib:$LD_LIBRARY_PATH
+	./main.elf
