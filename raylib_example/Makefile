@@ -16,5 +16,4 @@ clean:
 	rm -f $(BINS) *.o
 
 run:
-	export LD_LIBRARY_PATH=../Raylib/lib:$LD_LIBRARY_PATH
-	./main.elf
+	export LD_LIBRARY_PATH=../Raylib/lib/:$$LD_LIBRARY_PATH && ./main.elf

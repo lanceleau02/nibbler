@@ -16,5 +16,4 @@ clean:
 	rm $(BINS)
 
 run:
-	export LD_LIBRARY_PATH=../SFML/lib:$LD_LIBRARY_PATH
-	./main.elf
+	export LD_LIBRARY_PATH=../SFML/lib/:$$LD_LIBRARY_PATH && ./main.elf
