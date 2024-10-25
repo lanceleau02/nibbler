@@ -13,7 +13,11 @@ all: $(BINS)
 	$(CC) $(CFLAGS) -o $@ $^ $(SDL_INCLUDE) $(LDFLAGS)
 
 clean:
-	rm $(BINS)
+	rm -f $(BINS) *.o
+
+re:
+	$(MAKE) clean
+	$(MAKE) all
 
 run:
 	export LD_LIBRARY_PATH=../SDL/:$$LD_LIBRARY_PATH && ./main.elf

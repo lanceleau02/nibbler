@@ -13,7 +13,11 @@ all: $(BINS)
 	$(CC) $(CFLAGS) -o $@ $^ $(SFML_INCLUDE) $(LDFLAGS)
 
 clean:
-	rm $(BINS)
+	rm -f $(BINS) *.o
+
+re:
+	$(MAKE) clean
+	$(MAKE) all
 
 run:
 	export LD_LIBRARY_PATH=../SFML/lib/:$$LD_LIBRARY_PATH && ./main.elf

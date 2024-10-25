@@ -15,5 +15,9 @@ all: $(BINS)
 clean:
 	rm -f $(BINS) *.o
 
+re:
+	$(MAKE) clean
+	$(MAKE) all
+
 run:
 	export LD_LIBRARY_PATH=../Raylib/lib/:$$LD_LIBRARY_PATH && ./main.elf
