@@ -1,4 +1,4 @@
-#include "../SFML/include/SFML/Graphics.hpp"
+#include "../libs/SFML/include/SFML/Graphics.hpp"
 #include <iostream>
 
 extern "C" void	createCircle(sf::CircleShape* circle) {
@@ -22,4 +22,5 @@ extern "C" void createWindow() {
 		window.draw(*circle);
 		window.display();
 	}
+    window.close();
 }

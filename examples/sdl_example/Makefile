@@ -1,7 +1,7 @@
 CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror
-LDFLAGS			=	-L ../SDL/ -lSDL2 -ldl
-SDL_INCLUDE		=	-I ../SDL/include/
+LDFLAGS			=	-L ../libs/SDL/ -lSDL2 -ldl
+SDL_INCLUDE		=	-I ../libs/SDL/include/
 BINS			=	wrapper.so main.elf
 
 all: $(BINS)
@@ -20,4 +20,4 @@ re:
 	$(MAKE) all
 
 run:
-	export LD_LIBRARY_PATH=../SDL/:$$LD_LIBRARY_PATH && ./main.elf
+	export LD_LIBRARY_PATH=../libs/SDL/:$$LD_LIBRARY_PATH && ./main.elf

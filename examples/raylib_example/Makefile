@@ -1,7 +1,7 @@
 CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror
-LDFLAGS			=	-L ../Raylib/lib -lraylib -lglfw -lGL -lm -lpthread -ldl -lrt -lX11
-RAYLIB_INCLUDE	=	-I ../Raylib/include
+LDFLAGS			=	-L ../libs/Raylib/lib -lraylib -lglfw -lGL -lm -lpthread -ldl -lrt -lX11
+RAYLIB_INCLUDE	=	-I ../libs/Raylib/include
 BINS			=	wrapper.so main.elf
 
 all: $(BINS)
@@ -20,4 +20,4 @@ re:
 	$(MAKE) all
 
 run:
-	export LD_LIBRARY_PATH=../Raylib/lib/:$$LD_LIBRARY_PATH && ./main.elf
+	export LD_LIBRARY_PATH=../libs/Raylib/lib/:$$LD_LIBRARY_PATH && ./main.elf

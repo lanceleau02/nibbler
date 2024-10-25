@@ -1,4 +1,4 @@
-#include "../SDL/include/SDL.h"
+#include "../libs/SDL/include/SDL.h"
 #include <iostream>
 
 extern "C" void	createCircle(SDL_Renderer* renderer) {
@@ -18,7 +18,7 @@ extern "C" void createWindow() {
 		return ;
 	}
 
-	SDL_Window* window = SDL_CreateWindow("SDL Circle", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("SDL - Circle Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
 	if (!window) {
 		std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();

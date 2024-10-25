@@ -1,7 +1,7 @@
-#include "../Raylib/include/raylib.h"
+#include "../libs/Raylib/include/raylib.h"
 
 extern "C" void createCircle() {
-	DrawCircle(0, 0, 100, GREEN);
+	DrawCircle(100, 100, 100, GREEN);
 }
 
 extern "C" void createWindow() {
@@ -12,4 +12,5 @@ extern "C" void createWindow() {
 		createCircle();
 		EndDrawing();
 	}
+    CloseWindow();
 }

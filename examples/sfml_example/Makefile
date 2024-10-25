@@ -1,7 +1,7 @@
 CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror
-LDFLAGS			=	-L ../SFML/lib -lsfml-graphics -lsfml-window -lsfml-system -ldl
-SFML_INCLUDE	=	-I ../SFML/include
+LDFLAGS			=	-L ../libs/SFML/lib -lsfml-graphics -lsfml-window -lsfml-system -ldl
+SFML_INCLUDE	=	-I ../libs/SFML/include
 BINS			=	wrapper.so main.elf
 
 all: $(BINS)
@@ -20,4 +20,4 @@ re:
 	$(MAKE) all
 
 run:
-	export LD_LIBRARY_PATH=../SFML/lib/:$$LD_LIBRARY_PATH && ./main.elf
+	export LD_LIBRARY_PATH=../libs/SFML/lib/:$$LD_LIBRARY_PATH && ./main.elf
