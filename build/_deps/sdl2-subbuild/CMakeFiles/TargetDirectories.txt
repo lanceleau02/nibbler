@@ -1,0 +1,3 @@
+/home/laprieur/Documents/42/nibbler/build/_deps/sdl2-subbuild/CMakeFiles/sdl2-populate.dir
+/home/laprieur/Documents/42/nibbler/build/_deps/sdl2-subbuild/CMakeFiles/edit_cache.dir
+/home/laprieur/Documents/42/nibbler/build/_deps/sdl2-subbuild/CMakeFiles/rebuild_cache.dir
