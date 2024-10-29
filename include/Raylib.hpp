@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:49 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/26 20:13:59 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:24:09 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class Raylib : public ILibraries {
 	
 	public:
 		Raylib();
-		Raylib(const Raylib& other);
-		Raylib& operator=(const Raylib& other);
+		// Raylib(const Raylib& other);
+		// Raylib& operator=(const Raylib& other);
 		~Raylib();
 		
 		void	createWindow();

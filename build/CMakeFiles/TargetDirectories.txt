@@ -1,4 +1,0 @@
-/home/laprieur/Documents/42/nibbler/build/CMakeFiles/package.dir
-/home/laprieur/Documents/42/nibbler/build/CMakeFiles/package_source.dir
-/home/laprieur/Documents/42/nibbler/build/CMakeFiles/edit_cache.dir
-/home/laprieur/Documents/42/nibbler/build/CMakeFiles/rebuild_cache.dir

@@ -12,5 +12,5 @@ extern "C" void createWindow() {
 		createCircle();
 		EndDrawing();
 	}
-    CloseWindow();
+	CloseWindow();
 }

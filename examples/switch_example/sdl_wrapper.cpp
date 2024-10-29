@@ -33,8 +33,8 @@ extern "C" void createWindow() {
 		return ;
 	}
 
-	bool        quit = false;
-	SDL_Event   event;
+	bool		quit = false;
+	SDL_Event	event;
 	while (!quit) {
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT)

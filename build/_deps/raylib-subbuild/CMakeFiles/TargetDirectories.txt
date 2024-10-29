@@ -1,3 +1,0 @@
-/home/laprieur/Documents/42/nibbler/build/_deps/raylib-subbuild/CMakeFiles/raylib-populate.dir
-/home/laprieur/Documents/42/nibbler/build/_deps/raylib-subbuild/CMakeFiles/edit_cache.dir
-/home/laprieur/Documents/42/nibbler/build/_deps/raylib-subbuild/CMakeFiles/rebuild_cache.dir

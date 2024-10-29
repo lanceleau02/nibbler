@@ -18,9 +18,8 @@ extern "C" void createWindow() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
 		window.draw(*circle);
 		window.display();
 	}
-    window.close();
+	window.close();
 }
