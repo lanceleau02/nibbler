@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/29 14:43:55 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:21:40 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,20 @@ void	openLibrary(void** handle, const std::string& library) {
 	}
 }
 
-createWindow_t loadSymbol(void* handle) {
+createLibraryInstance_t	loadSymbol(void* handle) {
 	dlerror();
-	std::cout << "Loading symbol createWindow..." << std::endl;
-	createWindow_t createWindow = (createWindow_t) dlsym(handle, "createWindow");
+	std::cout << "Loading symbol createLibraryInstance..." << std::endl;
+	auto createLibraryInstance = (ILibraries* (*)()) dlsym(handle, "createLibraryInstance");
 	const char *dlsym_error = dlerror();
 	if (dlsym_error) {
-		std::cerr << "Cannot load symbol 'createWindow': " << dlsym_error << std::endl;
+		std::cerr << "Cannot load symbol 'createLibraryInstance': " << dlsym_error << std::endl;
 		dlclose(handle);
 		return NULL;
 	}
-	return createWindow;
+	return createLibraryInstance;
 }
 
 int main() {
-	Raylib	raylib;
-	SDL		sdl;
-	SFML	sfml;
-	
 	std::cout << "Press 'q' to quit.\n";
 
 	while (true) {
@@ -82,49 +78,47 @@ int main() {
 			std::cout << "You pressed: " << key << '\n';
 
 			void* handle = NULL;
-			createWindow_t createWindow;
+			ILibraries* libraryInstance = NULL;
 			if (key == '1') {
 				// Raylib
 				openLibrary(&handle, "Raylib");
 				if (handle) {
-					createWindow = loadSymbol(handle);
-					if (createWindow) {
-						std::cout << "Calling Raylib createWindow()..." << std::endl;
-						raylib.createWindow();
-					}
-					std::cout << "Closing Raylib library..." << std::endl;
-					dlclose(handle);
+					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+					if (createLibraryInstance)
+						libraryInstance = createLibraryInstance();
 				}
 			}
 			else if (key == '2') {
 				// SDL
 				openLibrary(&handle, "SDL");
 				if (handle) {
-					createWindow = loadSymbol(handle);
-					if (createWindow) {
-						std::cout << "Calling SDL createWindow()..." << std::endl;
-						sdl.createWindow();
-					}
-					std::cout << "Closing SDL library..." << std::endl;
-					dlclose(handle);
+					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+					if (createLibraryInstance)
+						libraryInstance = createLibraryInstance();
 				}
 			}
 			else if (key == '3') {
 				// SFML
 				openLibrary(&handle, "SFML");
 				if (handle) {
-					createWindow = loadSymbol(handle);
-					if (createWindow) {
-						std::cout << "Calling SFML createWindow()..." << std::endl;
-						sfml.createWindow();
-					}
-					std::cout << "Closing SFML library..." << std::endl;
-					dlclose(handle);
+					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+					if (createLibraryInstance)
+						libraryInstance = createLibraryInstance();
 				}
 			}
 			else if (key == 'q') {
 				std::cout << "Quitting...\n";
 				break;
+			}
+
+			// Si une instance a été créée, on appelle createWindow() dessus
+			if (libraryInstance) {
+				std::cout << "Calling createWindow() for the selected library...\n";
+				libraryInstance->createWindow();
+				delete libraryInstance;
+				dlclose(handle);
+			} else if (handle) {
+				dlclose(handle);
 			}
 		}
 	}
