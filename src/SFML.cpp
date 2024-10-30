@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 12:08:44 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:11:09 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ SFML::SFML() {}
 
 SFML::~SFML() {}
 
-/* void	SFML::createSquare(sf::RenderWindow window) override {
+void	SFML::createSquare(void* r) {
+	sf::RenderWindow* window = (sf::RenderWindow*)r;
 	sf::RectangleShape square(sf::Vector2f(100.f, 100.f));
 	square.setFillColor(sf::Color::Green);
 	square.setPosition(350.f, 250.f);
-	window.draw(square);
-} */
+	window->draw(square);
+}
 
 void	SFML::createWindow() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Nibbler (SFML)");
@@ -36,7 +37,7 @@ void	SFML::createWindow() {
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-		// createSquare(window);
+		createSquare(&window);
 		window.display();
 	}
 	window.close();

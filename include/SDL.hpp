@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 11:58:22 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:40:12 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define SDL_HPP
 
 #include "ILibraries.hpp"
-#include <iostream>
 
 class ILibraries;
 
@@ -28,7 +27,7 @@ class SDL : public ILibraries {
 		~SDL();
 		
 		void	createWindow();
-		// void		createSquare(SDL_Renderer* renderer);
+		void	createSquare(void* window);
 };
 
 #endif

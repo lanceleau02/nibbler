@@ -6,19 +6,11 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 12:00:31 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:06:36 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ILibraries.hpp"
-#include "../include/Raylib.hpp"
-#include "../include/SDL.hpp"
-#include "../include/SFML.hpp"
-#include <iostream>
-#include <fcntl.h>
-#include <dlfcn.h>
-#include <unistd.h>
-#include <termios.h>
 
 int kbhit() {
 	termios oldt, newt;
@@ -69,7 +61,34 @@ createLibraryInstance_t	loadSymbol(void* handle) {
 	return createLibraryInstance;
 }
 
-int main() {
+void	parsing(char* w, char* h) {
+	std::istringstream	width(w);
+	std::istringstream	height(h);
+	int					widthValue;
+	int					heightValue;
+	
+	if (!(width >> widthValue) || !(width.eof()) || 
+        !(height >> heightValue) || !(height.eof()) ||
+        widthValue < 0 || widthValue < MIN_WIDTH || widthValue > MAX_WIDTH ||
+        heightValue < 0 || heightValue < MIN_HEIGHT || heightValue > MAX_HEIGHT)
+		throw UsageException("invalid area values.", "800 ≤ WIDTH ≤ 1920 || 600 ≤ HEIGHT ≤ 1080");
+}
+
+int main(int argc, char** argv) {
+	try {
+		if (argc != 3)
+			throw UsageException("invalid number of arguments.", "./main.elf <width> <height>");
+		parsing(argv[1], argv[2]);
+	} catch (const UsageException& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Usage: " << e.getUsageMessage() << std::endl;
+        return EXIT_FAILURE;
+	} catch (const std::exception& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
+	
 	std::cout << "Press 'q' to quit.\n";
 
 	while (true) {

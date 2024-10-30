@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 12:04:25 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:10:04 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ SDL::SDL() {}
 
 SDL::~SDL() {}
 
-/* void	SDL::createSquare(SDL_Renderer* renderer) override {
+void	SDL::createSquare(void* r) {
+	SDL_Renderer *renderer = (SDL_Renderer *)r;
+
 	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	SDL_Rect square = { 350, 250, 100, 100 };
 	SDL_RenderFillRect(renderer, &square);
-} */
+}
 
 void	SDL::createWindow() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -56,7 +58,7 @@ void	SDL::createWindow() {
 		}
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
-		// createSquare();
+		createSquare(renderer);
 		SDL_RenderPresent(renderer);
 	}
 	SDL_DestroyRenderer(renderer);
