@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:49 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/29 14:24:09 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:58:06 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Raylib : public ILibraries {
 		~Raylib();
 		
 		void	createWindow();
+        // void    createSquare();
 };
 
 #endif

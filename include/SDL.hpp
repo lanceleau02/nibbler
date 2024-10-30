@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/29 14:24:07 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:58:22 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class SDL : public ILibraries {
 		~SDL();
 		
 		void	createWindow();
+		// void		createSquare(SDL_Renderer* renderer);
 };
 
 #endif

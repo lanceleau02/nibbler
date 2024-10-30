@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 10:21:40 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:00:31 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,39 +79,21 @@ int main() {
 
 			void* handle = NULL;
 			ILibraries* libraryInstance = NULL;
-			if (key == '1') {
-				// Raylib
+			if (key == '1')
 				openLibrary(&handle, "Raylib");
-				if (handle) {
-					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
-					if (createLibraryInstance)
-						libraryInstance = createLibraryInstance();
-				}
-			}
-			else if (key == '2') {
-				// SDL
+			else if (key == '2')
 				openLibrary(&handle, "SDL");
-				if (handle) {
-					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
-					if (createLibraryInstance)
-						libraryInstance = createLibraryInstance();
-				}
-			}
-			else if (key == '3') {
-				// SFML
+			else if (key == '3')
 				openLibrary(&handle, "SFML");
-				if (handle) {
-					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
-					if (createLibraryInstance)
-						libraryInstance = createLibraryInstance();
-				}
+			if (handle) {
+				createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+				if (createLibraryInstance)
+					libraryInstance = createLibraryInstance();
 			}
-			else if (key == 'q') {
+			if (key == 'q') {
 				std::cout << "Quitting...\n";
 				break;
 			}
-
-			// Si une instance a été créée, on appelle createWindow() dessus
 			if (libraryInstance) {
 				std::cout << "Calling createWindow() for the selected library...\n";
 				libraryInstance->createWindow();

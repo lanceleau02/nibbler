@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 09:57:27 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:04:25 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ SDL::SDL() {}
 // SDL& SDL::operator=(const SDL& other) { return other; }
 
 SDL::~SDL() {}
+
+/* void	SDL::createSquare(SDL_Renderer* renderer) override {
+	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	SDL_Rect square = { 350, 250, 100, 100 };
+	SDL_RenderFillRect(renderer, &square);
+} */
 
 void	SDL::createWindow() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -45,11 +51,12 @@ void	SDL::createWindow() {
 	SDL_Event   event;
 	while (!quit) {
 		while (SDL_PollEvent(&event) != 0) {
-			if (event.type == SDL_QUIT)
+			if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
 				quit = true;
 		}
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
+		// createSquare();
 		SDL_RenderPresent(renderer);
 	}
 	SDL_DestroyRenderer(renderer);
