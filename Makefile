@@ -12,17 +12,17 @@ BINS			=	src/Raylib.so src/SDL.so src/SFML.so src/main.elf
 all: $(BINS)
 
 %.so: %.cpp
-	$(CC) $(CFLAGS) $(LDFLAGS) -fPIC -shared -o $@ $^ $(RAYLIB_LDFLAGS) $(SDL_LDFLAGS) $(SFML_LDFLAGS) $(RAYLIB_INCLUDE) $(SDL_INCLUDE) $(SFML_INCLUDE)
+	@$(CC) $(CFLAGS) $(LDFLAGS) -fPIC -shared -o $@ $^ $(RAYLIB_LDFLAGS) $(SDL_LDFLAGS) $(SFML_LDFLAGS) $(RAYLIB_INCLUDE) $(SDL_INCLUDE) $(SFML_INCLUDE)
 
 src/main.elf: src/main.cpp src/Raylib.so src/SDL.so src/SFML.so
-	$(CC) $(CFLAGS) -o $@ $^ -ldl
+	@$(CC) $(CFLAGS) -o $@ $^ -ldl
 
 clean:
-	rm -f $(BINS) *.o
+	@rm -f $(BINS) *.o
 
 re:
-	$(MAKE) clean
-	$(MAKE) all
+	@$(MAKE) clean
+	@$(MAKE) all
 
 run:
-	./src/main.elf
+	@./nibbler 800 600

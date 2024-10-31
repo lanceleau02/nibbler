@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 17:59:11 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:52:34 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int kbhit() {
 
 void	openLibrary(void** handle, const std::string& library) {
 	std::cout << "Opening the " << library << " library..." << std::endl;
-	*handle = dlopen(("./src/" + library + ".so").c_str(), RTLD_LAZY);
+	*handle = dlopen(("./" + library + ".so").c_str(), RTLD_LAZY);
 	if (!*handle) {
 		std::cerr << "Cannot open library: " << dlerror() << std::endl;
 		return ;
