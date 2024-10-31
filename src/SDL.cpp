@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/31 11:57:32 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:58:18 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,36 @@ SDL::SDL() {}
 SDL::~SDL() {}
 
 void	SDL::createSquare(void* r) {
-	SDL_Renderer *renderer = (SDL_Renderer *)r;
-
+	SDL_Renderer* renderer = static_cast<SDL_Renderer*>(r);
 	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	SDL_Rect square = { 350, 250, 100, 100 };
 	SDL_RenderFillRect(renderer, &square);
 }
 
-void	SDL::createWindow() {
+void    SDL::clearWindow(void* r) {
+	SDL_Window* window = static_cast<SDL_Window*>(r);
+	SDL_Renderer* renderer = SDL_GetRenderer(window);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+}
+
+void    SDL::display(void* r) {
+	SDL_Window* window = static_cast<SDL_Window*>(r);
+	SDL_Renderer* renderer = SDL_GetRenderer(window);
+	SDL_RenderPresent(renderer);
+}
+
+void*   SDL::createWindow() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
-		return ;
+		return nullptr;
 	}
 
 	SDL_Window* window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
 	if (!window) {
 		std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
-		return ;
+		return nullptr;
 	}
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -46,10 +58,11 @@ void	SDL::createWindow() {
 		std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_DestroyWindow(window);
 		SDL_Quit();
-		return ;
+		return nullptr;
 	}
+	return static_cast<void*>(window);
 
-	bool        quit = false;
+	/* bool        quit = false;
 	SDL_Event   event;
 	while (!quit) {
 		while (SDL_PollEvent(&event) != 0) {
@@ -63,7 +76,7 @@ void	SDL::createWindow() {
 	}
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-	SDL_Quit();
+	SDL_Quit(); */
 }
 
 extern "C" {

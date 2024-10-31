@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 13:11:09 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:50:18 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,28 @@ SFML::SFML() {}
 SFML::~SFML() {}
 
 void	SFML::createSquare(void* r) {
-	sf::RenderWindow* window = (sf::RenderWindow*)r;
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
 	sf::RectangleShape square(sf::Vector2f(100.f, 100.f));
 	square.setFillColor(sf::Color::Green);
 	square.setPosition(350.f, 250.f);
 	window->draw(square);
 }
 
-void	SFML::createWindow() {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Nibbler (SFML)");
+void	SFML::clearWindow(void* r) {
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	window->clear(sf::Color::Black);
+}
 
-	while (window.isOpen()) {
+void	SFML::display(void* r) {
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	window->display();
+}
+
+void*   SFML::createWindow() {
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(800, 600), "Nibbler (SFML)");
+	return static_cast<void*>(window);
+
+	/* while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
@@ -40,7 +51,7 @@ void	SFML::createWindow() {
 		createSquare(&window);
 		window.display();
 	}
-	window.close();
+	window.close(); */
 }
 
 extern "C" {
