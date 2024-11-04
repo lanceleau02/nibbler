@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/31 15:58:18 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:37:17 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,25 @@ SDL::SDL() {}
 SDL::~SDL() {}
 
 void	SDL::createSquare(void* r) {
-	SDL_Renderer* renderer = static_cast<SDL_Renderer*>(r);
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	// SDL_Window* _window = static_cast<SDL_Window*>(r);
+	// _renderer = SDL_GetRenderer(_window);
 	SDL_Rect square = { 350, 250, 100, 100 };
-	SDL_RenderFillRect(renderer, &square);
+	SDL_SetRenderDrawColor(_renderer, 0, 255, 0, 255);
+    SDL_RenderFillRect(_renderer, &square);
+    SDL_RenderDrawRect(_renderer, &square);
 }
 
 void    SDL::clearWindow(void* r) {
-	SDL_Window* window = static_cast<SDL_Window*>(r);
-	SDL_Renderer* renderer = SDL_GetRenderer(window);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
+	// SDL_Window* _window = static_cast<SDL_Window*>(r);
+	// _renderer = SDL_GetRenderer(_window);
+	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
+	SDL_RenderClear(_renderer);
 }
 
 void    SDL::display(void* r) {
-	SDL_Window* window = static_cast<SDL_Window*>(r);
-	SDL_Renderer* renderer = SDL_GetRenderer(window);
-	SDL_RenderPresent(renderer);
+	// SDL_Window* _window = static_cast<SDL_Window*>(r);
+	// _renderer = SDL_GetRenderer(_window);
+	SDL_RenderPresent(_renderer);
 }
 
 void*   SDL::createWindow() {
@@ -46,21 +48,21 @@ void*   SDL::createWindow() {
 		return nullptr;
 	}
 
-	SDL_Window* window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
-	if (!window) {
+	_window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+	if (!_window) {
 		std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
 		return nullptr;
 	}
 
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (!renderer) {
+	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
+	if (!_renderer) {
 		std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
-		SDL_DestroyWindow(window);
+		SDL_DestroyWindow(_window);
 		SDL_Quit();
 		return nullptr;
 	}
-	return static_cast<void*>(window);
+	return static_cast<void*>(_window);
 
 	/* bool        quit = false;
 	SDL_Event   event;

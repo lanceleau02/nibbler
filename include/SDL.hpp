@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/31 15:36:08 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:29:26 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ class ILibraries;
 
 class SDL : public ILibraries {
 	private:
-	
+		SDL_Window*		_window;
+		SDL_Renderer*	_renderer;
+
 	public:
 		SDL();
 		// SDL(const SDL& other);
