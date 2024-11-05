@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 11:28:51 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:03:09 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,6 @@ void*   SDL::createWindow() {
 		return nullptr;
 	}
 	return static_cast<void*>(_window);
-
-	/* bool        quit = false;
-	SDL_Event   event;
-	while (!quit) {
-		while (SDL_PollEvent(&event) != 0) {
-			if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
-				quit = true;
-		}
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-		createSquare(renderer);
-		SDL_RenderPresent(renderer);
-	}
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit(); */
 }
 
 extern "C" {

@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 11:28:07 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:03:12 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,6 @@ int	SFML::handleEvents(void* r) {
 void*   SFML::createWindow() {
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(800, 600), "Nibbler (SFML)");
 	return static_cast<void*>(window);
-
-	/* while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
-				window.close();
-		}
-		createSquare(&window);
-		window.display();
-	}
-	window.close(); */
 }
 
 extern "C" {
