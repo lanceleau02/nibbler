@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:12:58 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:29:04 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@
 #define MAX_HEIGHT	1000
 
 enum Keys {
-	CLOSE_WINDOW
+	CLOSE_WINDOW,
+    ONE,
+    TWO,
+    THREE
 };
 
 class UsageException : public std::invalid_argument {

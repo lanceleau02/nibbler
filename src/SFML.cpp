@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:15:22 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:00:13 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ int	SFML::handleEvents(void* r) {
 	sf::Event event;
 	
 	while (window->pollEvent(event)) {
-		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
-			return CLOSE_WINDOW;
-		}
+		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) return CLOSE_WINDOW;
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) return ONE;
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) return TWO;
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num3) return THREE;
 	}
 	return -1;
 }

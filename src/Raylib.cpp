@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:14:04 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:56:07 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void	Raylib::display(void* r) {
 }
 
 int	Raylib::handleEvents(void* r) {
-	if (IsKeyPressed(KEY_ESCAPE)) {
-		return CLOSE_WINDOW;
-	}
+	if (IsKeyPressed(KEY_ESCAPE)) return CLOSE_WINDOW;
+	if (IsKeyPressed(KEY_ONE)) return ONE;
+	if (IsKeyPressed(KEY_TWO)) return TWO;
+	if (IsKeyPressed(KEY_THREE)) return THREE;
 	return -1;
 }
 

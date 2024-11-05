@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 14:29:01 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:53:23 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,46 @@ void game() {
 			}
 		}
 		if (libraryInstance) {
-			if (libraryInstance->handleEvents(renderer) == CLOSE_WINDOW) {
+			if (libraryInstance->handleEvents(renderer) == CLOSE_WINDOW) libraryInstance->closeWindow(renderer);
+			if (libraryInstance->handleEvents(renderer) == ONE) {
 				libraryInstance->closeWindow(renderer);
+				if (libraryInstance) delete libraryInstance;
+				if (handle) {
+					openLibrary(&handle, "raylib");
+					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+					if (createLibraryInstance) {
+						libraryInstance = createLibraryInstance();
+						renderer = libraryInstance->createWindow();
+					}
+				}
+			}
+			if (libraryInstance->handleEvents(renderer) == TWO) {
+				libraryInstance->closeWindow(renderer);
+				if (libraryInstance) delete libraryInstance;
+				if (handle) {
+					openLibrary(&handle, "sdl2");
+					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+					if (createLibraryInstance) {
+						libraryInstance = createLibraryInstance();
+						renderer = libraryInstance->createWindow();
+					}
+				}
+			}
+			if (libraryInstance->handleEvents(renderer) == THREE) {
+				libraryInstance->closeWindow(renderer);
+				if (libraryInstance) delete libraryInstance;
+				if (handle) {
+					openLibrary(&handle, "sfml");
+					createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
+					if (createLibraryInstance) {
+						libraryInstance = createLibraryInstance();
+						renderer = libraryInstance->createWindow();
+					}
+				}
 			}
 			if (libraryInstance->isOpen(renderer)) {
 				libraryInstance->centerWindow(renderer);
-                libraryInstance->clearWindow(renderer);
+				libraryInstance->clearWindow(renderer);
 				libraryInstance->createSquare(renderer);
 				libraryInstance->display(renderer);
 			}

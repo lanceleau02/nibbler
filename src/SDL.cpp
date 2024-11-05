@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:13:53 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:58:51 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int	SDL::handleEvents(void* r) {
 	SDL_Event   event;
 
 	while (SDL_PollEvent(&event) != 0) {
-		if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) {
-			return CLOSE_WINDOW;
-		}
+		if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return CLOSE_WINDOW;
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_1) return ONE;
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_2) return TWO;
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_3) return THREE;
 	}
 	return -1;
 }
@@ -81,10 +82,10 @@ void*   SDL::createWindow() {
 }
 
 void    SDL::centerWindow(void* r) {
-    SDL_DisplayMode dm;
-    SDL_GetDesktopDisplayMode(0, &dm);
-    SDL_SetWindowPosition(_window, (dm.w - 500) / 2, (dm.h - 500) / 2);
-    SDL_ShowWindow(_window);
+	SDL_DisplayMode dm;
+	SDL_GetDesktopDisplayMode(0, &dm);
+	SDL_SetWindowPosition(_window, (dm.w - 500) / 2, (dm.h - 500) / 2);
+	SDL_ShowWindow(_window);
 }
 
 extern "C" {
