@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/31 16:31:22 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:49:26 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,66 +74,22 @@ void	parsing(char* w, char* h) {
 		throw UsageException("invalid area values.", "800 ≤ WIDTH ≤ 1920 || 600 ≤ HEIGHT ≤ 1080");
 }
 
-/* void	game() {
-	std::cout << "Press 'q' to quit." << std::endl;
-	while (true) {
-		if (kbhit()) {
-			char key = getchar();
-			std::cout << "You pressed: " << key << '\n';
-
-			void* handle = NULL;
-			ILibraries* libraryInstance = NULL;
-			if (key == '1')
-				openLibrary(&handle, "raylib");
-			else if (key == '2')
-				openLibrary(&handle, "sdl2");
-			else if (key == '3')
-				openLibrary(&handle, "sfml");
-			if (handle) {
-				createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
-				if (createLibraryInstance)
-					libraryInstance = createLibraryInstance();
-			}
-			if (key == 'q') {
-				std::cout << "Quitting...\n";
-				break;
-			}
-			if (libraryInstance) {
-				std::cout << "Calling createWindow() for the selected library...\n";
-				void* renderer = libraryInstance->createWindow();
-				libraryInstance->clearWindow(renderer ? renderer : nullptr);
-				libraryInstance->createSquare(renderer ? renderer : nullptr);
-				libraryInstance->display(renderer ? renderer : nullptr);
-				delete libraryInstance;
-				dlclose(handle);
-			} else if (handle) {
-				dlclose(handle);
-			}
-		}
-	}
-} */
-
 void game() {
-	std::cout << "Press 'q' to quit." << std::endl;
-
-	void* handle = nullptr;
 	ILibraries* libraryInstance = nullptr;
-	void* renderer = nullptr;
+	void*       handle = nullptr;
+	void*       renderer = nullptr;
 
+	std::cout << "Press 'q' to quit." << std::endl;	
 	while (true) {
 		if (kbhit()) {
 			char key = getchar();
-			std::cout << "You pressed: " << key << '\n';
-
-			// Release any existing library instance and close the handle
+			std::cout << "You pressed: " << key << std::endl;
 			if (libraryInstance) {
 				delete libraryInstance;
 				dlclose(handle);
 				handle = nullptr;
 				libraryInstance = nullptr;
 			}
-
-			// Open new library based on user input
 			if (key == '1')
 				openLibrary(&handle, "raylib");
 			else if (key == '2')
@@ -141,10 +97,9 @@ void game() {
 			else if (key == '3')
 				openLibrary(&handle, "sfml");
 			else if (key == 'q') {
-				std::cout << "Quitting...\n";
+				std::cout << "Quitting..." << std::endl;
 				break;
 			}
-
 			if (handle) {
 				createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
 				if (createLibraryInstance) {
@@ -153,27 +108,23 @@ void game() {
 				}
 			}
 			if (key == 'q') {
-				std::cout << "Quitting...\n";
+				std::cout << "Quitting..." << std::endl;
 				break;
 			}
 		}
-
-		// Continue only if a library instance is loaded
 		if (libraryInstance) {
-			// Clear, draw, and display
-			libraryInstance->clearWindow(renderer);
-			libraryInstance->createSquare(renderer);
-			libraryInstance->display(renderer);
+			if (libraryInstance->handleEvents(renderer) == CLOSE_WINDOW) {
+				libraryInstance->closeWindow(renderer);
+			}
+			if (libraryInstance->isOpen(renderer)) {
+				libraryInstance->clearWindow(renderer);
+				libraryInstance->createSquare(renderer);
+				libraryInstance->display(renderer);
+			}
 		}
 	}
-	
-	// Cleanup before exiting
-	if (libraryInstance) {
-		delete libraryInstance;
-	}
-	if (handle) {
-		dlclose(handle);
-	}
+	if (libraryInstance) delete libraryInstance;
+	if (handle) dlclose(handle);
 }
 
 int main(int argc, char** argv) {

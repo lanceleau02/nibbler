@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/31 15:50:48 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:28:33 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,24 @@ void	Raylib::clearWindow(void* r) {
 	ClearBackground(BLACK);
 }
 
+void	Raylib::closeWindow(void* r) {
+	CloseWindow();
+}
+
 void	Raylib::display(void* r) {
 	(void)r;
 	EndDrawing();
+}
+
+int	Raylib::handleEvents(void* r) {
+	if (IsKeyPressed(KEY_ESCAPE)) {
+		return CLOSE_WINDOW;
+	}
+	return -1;
+}
+
+bool	Raylib::isOpen(void* r) {
+	return IsWindowState(FLAG_WINDOW_ALWAYS_RUN);
 }
 
 void*	Raylib::createWindow() {

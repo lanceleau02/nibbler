@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/31 15:50:18 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:28:07 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,31 @@ void	SFML::clearWindow(void* r) {
 	window->clear(sf::Color::Black);
 }
 
+void	SFML::closeWindow(void* r) {
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	window->close();
+}
+
 void	SFML::display(void* r) {
 	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
 	window->display();
+}
+
+bool	SFML::isOpen(void* r) {
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	return window->isOpen();
+}
+
+int	SFML::handleEvents(void* r) {
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	sf::Event event;
+	
+	while (window->pollEvent(event)) {
+		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
+			return CLOSE_WINDOW;
+		}
+	}
+	return -1;
 }
 
 void*   SFML::createWindow() {

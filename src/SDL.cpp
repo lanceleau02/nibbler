@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/04 16:37:17 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:28:51 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,40 @@ SDL::SDL() {}
 SDL::~SDL() {}
 
 void	SDL::createSquare(void* r) {
-	// SDL_Window* _window = static_cast<SDL_Window*>(r);
-	// _renderer = SDL_GetRenderer(_window);
 	SDL_Rect square = { 350, 250, 100, 100 };
 	SDL_SetRenderDrawColor(_renderer, 0, 255, 0, 255);
-    SDL_RenderFillRect(_renderer, &square);
-    SDL_RenderDrawRect(_renderer, &square);
+	SDL_RenderFillRect(_renderer, &square);
+	SDL_RenderDrawRect(_renderer, &square);
 }
 
 void    SDL::clearWindow(void* r) {
-	// SDL_Window* _window = static_cast<SDL_Window*>(r);
-	// _renderer = SDL_GetRenderer(_window);
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(_renderer);
 }
 
+void	SDL::closeWindow(void* r) {
+	SDL_DestroyRenderer(_renderer);
+	SDL_DestroyWindow(_window);
+	SDL_Quit();
+}
+
 void    SDL::display(void* r) {
-	// SDL_Window* _window = static_cast<SDL_Window*>(r);
-	// _renderer = SDL_GetRenderer(_window);
 	SDL_RenderPresent(_renderer);
+}
+
+bool	SDL::isOpen(void* r) {
+	return (_window != nullptr);
+}
+
+int	SDL::handleEvents(void* r) {
+	SDL_Event   event;
+
+	while (SDL_PollEvent(&event) != 0) {
+		if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) {
+			return CLOSE_WINDOW;
+		}
+	}
+	return -1;
 }
 
 void*   SDL::createWindow() {

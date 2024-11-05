@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/10/30 15:45:36 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:59:38 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 #define MIN_HEIGHT	600
 #define MAX_WIDTH	1920
 #define MAX_HEIGHT	1080
+
+enum Keys {
+	CLOSE_WINDOW
+};
 
 class UsageException : public std::invalid_argument {
 public:

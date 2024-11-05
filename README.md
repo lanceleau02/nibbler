@@ -16,4 +16,4 @@ The SFML package is momentarily non-functional so you'll need to use Suprapack t
 You can find the list of the available packages on: https://mesonbuild.com/Wrapdb-projects.html
 
 **Rebuild:**
-To avoid using the Makefile to rebuild the source and lib files, you can use the `ninja -C build` command.
+To avoid using the Makefile to rebuild the source and lib files, you can use the `ninja -C build install` command.
