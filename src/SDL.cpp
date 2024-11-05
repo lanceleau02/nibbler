@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 14:03:09 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:13:53 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void*   SDL::createWindow() {
 		return nullptr;
 	}
 
-	_window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+	_window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_SHOWN);
 	if (!_window) {
 		std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
@@ -78,6 +78,13 @@ void*   SDL::createWindow() {
 		return nullptr;
 	}
 	return static_cast<void*>(_window);
+}
+
+void    SDL::centerWindow(void* r) {
+    SDL_DisplayMode dm;
+    SDL_GetDesktopDisplayMode(0, &dm);
+    SDL_SetWindowPosition(_window, (dm.w - 500) / 2, (dm.h - 500) / 2);
+    SDL_ShowWindow(_window);
 }
 
 extern "C" {

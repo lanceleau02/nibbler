@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:37:30 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 11:28:13 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:15:16 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class SFML : public ILibraries {
 		~SFML();
 		
 		void*	createWindow();
+        void    centerWindow(void* r);
 		int 	handleEvents(void* r);
 		void    clearWindow(void* r);
 		void    closeWindow(void* r);

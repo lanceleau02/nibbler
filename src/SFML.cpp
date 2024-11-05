@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 14:03:12 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:15:22 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,14 @@ int	SFML::handleEvents(void* r) {
 }
 
 void*   SFML::createWindow() {
-	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(800, 600), "Nibbler (SFML)");
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(500, 500), "Nibbler (SFML)");
 	return static_cast<void*>(window);
+}
+
+void    SFML::centerWindow(void* r) {
+	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	sf::Vector2i pos((sf::VideoMode::getDesktopMode().width - 500) / 2, (sf::VideoMode::getDesktopMode().height - 575) / 2);
+	window->setPosition(pos);
 }
 
 extern "C" {

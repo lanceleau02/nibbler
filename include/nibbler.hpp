@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 10:59:38 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:12:58 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 #include <unistd.h>
 #include <termios.h>
 
-#define MIN_WIDTH	800
-#define MIN_HEIGHT	600
-#define MAX_WIDTH	1920
-#define MAX_HEIGHT	1080
+#define MIN_WIDTH	500
+#define MIN_HEIGHT	500
+#define MAX_WIDTH	1000
+#define MAX_HEIGHT	1000
 
 enum Keys {
 	CLOSE_WINDOW

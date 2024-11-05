@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 14:03:04 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:14:04 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,16 @@ bool	Raylib::isOpen(void* r) {
 }
 
 void*	Raylib::createWindow() {
-    SetTraceLogLevel(LOG_ERROR);
-	InitWindow(800, 600, "Nibbler (Raylib)");
+	SetTraceLogLevel(LOG_ERROR);
+	InitWindow(500, 500, "Nibbler (Raylib)");
 	return nullptr;
+}
+
+void    Raylib::centerWindow(void* r) {
+	int monitor = GetCurrentMonitor();
+	int monitorWidth = GetMonitorWidth(monitor);
+	int monitorHeight = GetMonitorHeight(monitor);
+	SetWindowPosition((int)(monitorWidth / 2) - (int)(500 / 2), (int)(monitorHeight / 2) - (int)(500 / 2));
 }
 
 extern "C" {

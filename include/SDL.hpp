@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 11:28:16 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:15:14 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class SDL : public ILibraries {
 		~SDL();
 		
 		void*	createWindow();
+        void    centerWindow(void* r);
 		int 	handleEvents(void* r);
 		void    clearWindow(void* r);
 		void    closeWindow(void* r);

@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 11:49:26 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:29:01 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ void game() {
 				libraryInstance->closeWindow(renderer);
 			}
 			if (libraryInstance->isOpen(renderer)) {
-				libraryInstance->clearWindow(renderer);
+				libraryInstance->centerWindow(renderer);
+                libraryInstance->clearWindow(renderer);
 				libraryInstance->createSquare(renderer);
 				libraryInstance->display(renderer);
 			}
