@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 14:15:14 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:44:40 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ class SDL : public ILibraries {
 	private:
 		SDL_Window*		_window;
 		SDL_Renderer*	_renderer;
+		SDL_Event		_event;
+		SDL_DisplayMode	_displayMode;
 
 	public:
 		SDL();
@@ -28,14 +30,14 @@ class SDL : public ILibraries {
 		// SDL& operator=(const SDL& other);
 		~SDL();
 		
-		void*	createWindow();
-        void    centerWindow(void* r);
 		int 	handleEvents(void* r);
+		bool	isOpen(void* r);
+		void    centerWindow(void* r);
 		void    clearWindow(void* r);
 		void    closeWindow(void* r);
 		void	createSquare(void* window);
-		bool	isOpen(void* r);
 		void	display(void* r);
+		void*	createWindow();
 };
 
 #endif

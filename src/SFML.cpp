@@ -6,70 +6,73 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 09:00:19 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:03:24 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/SFML.hpp"
 
-SFML::SFML() {}
+SFML::SFML() : _window(nullptr) {
+	_event = sf::Event();
+}
 
 // SFML::SFML(const SFML& other) {}
 
 // SFML& SFML::operator=(const SFML& other) { return other; }
 
-SFML::~SFML() {}
+SFML::~SFML() {
+	if (_window) delete _window;
+}
 
 void	SFML::createSquare(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
+	_window = static_cast<sf::RenderWindow*>(r);
 	sf::RectangleShape square(sf::Vector2f(100.f, 100.f));
 	square.setFillColor(sf::Color::Green);
 	square.setPosition(350.f, 250.f);
-	window->draw(square);
+	_window->draw(square);
 }
 
 void	SFML::clearWindow(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	window->clear(sf::Color::Black);
+	_window = static_cast<sf::RenderWindow*>(r);
+	_window->clear(sf::Color::Black);
 }
 
 void	SFML::closeWindow(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	window->close();
+	_window = static_cast<sf::RenderWindow*>(r);
+	_window->close();
 }
 
 void	SFML::display(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	window->display();
+	_window = static_cast<sf::RenderWindow*>(r);
+	_window->display();
 }
 
 bool	SFML::isOpen(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	return window->isOpen();
+	_window = static_cast<sf::RenderWindow*>(r);
+	return _window->isOpen();
 }
 
 int	SFML::handleEvents(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	sf::Event event = sf::Event();
+	_window = static_cast<sf::RenderWindow*>(r);
 	
-	if (window->pollEvent(event)) {
-		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) return CLOSE_WINDOW;
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) return ONE;
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) return TWO;
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num3) return THREE;
+	if (_window->pollEvent(_event)) {
+		if (_event.type == sf::Event::Closed || (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Escape)) return CLOSE_WINDOW;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Num1) return ONE;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Num2) return TWO;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Num3) return THREE;
 	}
 	return -1;
 }
 
 void*   SFML::createWindow() {
-	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(500, 500), "Nibbler (SFML)");
-	return static_cast<void*>(window);
+	_window = new sf::RenderWindow(sf::VideoMode(_windowWidth, _windowHeight), "Nibbler (SFML)");
+	return static_cast<void*>(_window);
 }
 
 void    SFML::centerWindow(void* r) {
-	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	sf::Vector2i pos((sf::VideoMode::getDesktopMode().width - 500) / 2, (sf::VideoMode::getDesktopMode().height - 575) / 2);
-	window->setPosition(pos);
+	_window = static_cast<sf::RenderWindow*>(r);
+	sf::Vector2i pos((sf::VideoMode::getDesktopMode().width - _windowWidth) / 2, (sf::VideoMode::getDesktopMode().height - (_windowHeight + 75)) / 2);
+	_window->setPosition(pos);
 }
 
 extern "C" {

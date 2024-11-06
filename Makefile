@@ -25,4 +25,4 @@ re:
 	@$(MAKE) all
 
 run:
-	@./nibbler 800 600
+	@./nibbler 500 500

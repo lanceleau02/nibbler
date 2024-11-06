@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:56:07 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:02:32 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ Raylib::Raylib() {}
 Raylib::~Raylib() {}
 
 void	Raylib::createSquare(void* r) {
-	(void)r;
 	DrawRectangle(350, 250, 100, 100, GREEN);
 }
 
 void	Raylib::clearWindow(void* r) {
-	(void)r;
 	BeginDrawing();
 	ClearBackground(BLACK);
 }
@@ -37,7 +35,6 @@ void	Raylib::closeWindow(void* r) {
 }
 
 void	Raylib::display(void* r) {
-	(void)r;
 	EndDrawing();
 }
 
@@ -55,7 +52,7 @@ bool	Raylib::isOpen(void* r) {
 
 void*	Raylib::createWindow() {
 	SetTraceLogLevel(LOG_ERROR);
-	InitWindow(500, 500, "Nibbler (Raylib)");
+	InitWindow(_windowWidth, _windowHeight, "Nibbler (Raylib)");
 	return nullptr;
 }
 
@@ -63,7 +60,7 @@ void    Raylib::centerWindow(void* r) {
 	int monitor = GetCurrentMonitor();
 	int monitorWidth = GetMonitorWidth(monitor);
 	int monitorHeight = GetMonitorHeight(monitor);
-	SetWindowPosition((int)(monitorWidth / 2) - (int)(500 / 2), (int)(monitorHeight / 2) - (int)(500 / 2));
+	SetWindowPosition((int)(monitorWidth / 2) - (int)(_windowWidth / 2), (int)(monitorHeight / 2) - (int)(_windowHeight / 2));
 }
 
 extern "C" {

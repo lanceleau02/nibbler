@@ -6,13 +6,13 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 09:01:51 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:51:42 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/SDL.hpp"
 
-SDL::SDL() {}
+SDL::SDL() : _window(nullptr), _renderer(nullptr) {}
 
 // SDL::SDL(const SDL& other) {}
 
@@ -47,44 +47,37 @@ bool	SDL::isOpen(void* r) {
 }
 
 int	SDL::handleEvents(void* r) {
-	SDL_Event   event;
-
-	if (SDL_PollEvent(&event) != 0) {
-		if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return CLOSE_WINDOW;
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_1) return ONE;
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_2) return TWO;
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_3) return THREE;
+	if (SDL_PollEvent(&_event) != 0) {
+		if (_event.type == SDL_QUIT || (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_ESCAPE)) return CLOSE_WINDOW;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_1) return ONE;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_2) return TWO;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_3) return THREE;
 	}
 	return -1;
 }
 
 void*   SDL::createWindow() {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
-		return nullptr;
-	}
-
-	_window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_SHOWN);
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+		throw std::runtime_error(std::string("SDL could not initialize! SDL_Error: ") + SDL_GetError());
+    
+	_window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _windowWidth, _windowHeight, SDL_WINDOW_SHOWN);
 	if (!_window) {
-		std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
-		return nullptr;
-	}
+		throw std::runtime_error(std::string("the window could not be created! SDL_Error: ") + SDL_GetError());
+    }
 
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	if (!_renderer) {
-		std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		SDL_DestroyWindow(_window);
 		SDL_Quit();
-		return nullptr;
+		throw std::runtime_error(std::string("the renderer could not be created! SDL_Error: ") + SDL_GetError());
 	}
 	return static_cast<void*>(_window);
 }
 
 void    SDL::centerWindow(void* r) {
-	SDL_DisplayMode dm;
-	SDL_GetDesktopDisplayMode(0, &dm);
-	SDL_SetWindowPosition(_window, (dm.w - 500) / 2, (dm.h - 500) / 2);
+	SDL_GetDesktopDisplayMode(0, &_displayMode);
+	SDL_SetWindowPosition(_window, (_displayMode.w - _windowWidth) / 2, (_displayMode.h - _windowHeight) / 2);
 	SDL_ShowWindow(_window);
 }
 

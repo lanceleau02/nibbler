@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:29:04 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:40:21 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,23 @@
 #define MAX_WIDTH	1000
 #define MAX_HEIGHT	1000
 
+struct Nibbler {
+    int windowWidth;
+    int windowHeight;
+};
+
 enum Keys {
 	CLOSE_WINDOW,
     ONE,
     TWO,
     THREE
+};
+
+enum Libraries {
+    NO_LIB,
+    RAYLIB_LIB,
+    SDL_LIB,
+    SFML_LIB
 };
 
 class UsageException : public std::invalid_argument {
