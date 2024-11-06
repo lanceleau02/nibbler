@@ -1,6 +1,6 @@
-raylib_dep = [dependency('raylib')]
-sdl2_dep = [dependency('sdl2')]
-sfml_dep = [dependency('sfml-all')]
+raylib_dep = dependency('raylib')
+sdl2_dep = dependency('sdl2')
+sfml_dep = dependency('sfml-all')
 
 
 shared_library('raylib',
