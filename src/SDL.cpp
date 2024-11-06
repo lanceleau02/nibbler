@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 15:58:51 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 09:01:51 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool	SDL::isOpen(void* r) {
 int	SDL::handleEvents(void* r) {
 	SDL_Event   event;
 
-	while (SDL_PollEvent(&event) != 0) {
+	if (SDL_PollEvent(&event) != 0) {
 		if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return CLOSE_WINDOW;
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_1) return ONE;
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_2) return TWO;

@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/05 16:00:13 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/06 09:00:19 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ bool	SFML::isOpen(void* r) {
 
 int	SFML::handleEvents(void* r) {
 	sf::RenderWindow* window = static_cast<sf::RenderWindow*>(r);
-	sf::Event event;
+	sf::Event event = sf::Event();
 	
-	while (window->pollEvent(event)) {
+	if (window->pollEvent(event)) {
 		if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) return CLOSE_WINDOW;
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) return ONE;
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) return TWO;
