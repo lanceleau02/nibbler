@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 21:17:11 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:28:32 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include <vector>
 #include <deque>
 #include <chrono>
+#include <random>
 
 struct Colors {
     int r, g, b, a;
@@ -35,7 +36,7 @@ struct Colors {
 
 #define MIN_WIDTH	5
 #define MIN_HEIGHT	5
-#define MAX_WIDTH	30
+#define MAX_WIDTH	20
 #define MAX_HEIGHT	20
 
 struct Nibbler {

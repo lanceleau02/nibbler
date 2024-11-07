@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:16:52 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 20:24:21 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:08:28 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	parsing(Nibbler& nibbler, char* w, char* h) {
 		!(height >> heightValue) || !(height.eof()) ||
 		widthValue < 0 || widthValue < MIN_WIDTH || widthValue > MAX_WIDTH ||
 		heightValue < 0 || heightValue < MIN_HEIGHT || heightValue > MAX_HEIGHT)
-		throw UsageException("invalid area values.", "5 ≤ WIDTH ≤ 30 || 5 ≤ HEIGHT ≤ 20");
+		throw UsageException("invalid area values.", "5 ≤ WIDTH ≤ 20 || 5 ≤ HEIGHT ≤ 20");
 	nibbler.windowWidth = widthValue;
 	nibbler.windowHeight = heightValue;
 }

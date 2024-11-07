@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 22:01:11 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:29:09 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,15 @@ void Game::run() {
             std::chrono::duration<double> elapsedTime = currentTime - _lastMove;
             
             if (elapsedTime.count() >= _moveInterval) {
-                std::cout << "Moving Snake..." << std::endl;
                 moveSnake();
                 _lastMove = currentTime;
+            }
+
+            //---> Check if the player has won <---//
+            size_t maxScore = _gameAreaWidth * _gameAreaHeight;
+            if (_snake.size() == maxScore) {
+                std::cout << "You won!" << std::endl;
+                break;
             }
 
             //---> Update The position of the snake in the grid <---//
@@ -107,10 +113,12 @@ void Game::run() {
 }
 
 void Game::moveSnake() {
+    //--- Move the snake ---//
     for (int i = _snake.size() - 1; i > 0; --i) {
         _snake[i] = _snake[i - 1];
     }
     
+    //--- Change the direction of the snake ---//
     switch (_currentDirection) {
         case UP: _snake.front().second--; break;
         case DOWN: _snake.front().second++; break;
@@ -118,9 +126,25 @@ void Game::moveSnake() {
         case RIGHT: _snake.front().first++; break;
     }
 
+    //--- Check if the snake has eaten the food ---//
     if (_snake.front().first == _food.first && _snake.front().second == _food.second) {
         _snake.push_back(_snake.back());
         generateFood();
+    }
+
+    //--- Check if the snake has hit the wall---//
+    if (_snake.front().first < 0 || _snake.front().first >= _gameAreaWidth ||
+        _snake.front().second < 0 || _snake.front().second >= _gameAreaHeight) {
+        std::cout << "Game Over!" << std::endl;
+        exit(EXIT_SUCCESS);
+    }
+
+    //--- Check if the snake has hit itself ---//
+    for (size_t i = 1; i < _snake.size(); i++) {
+        if (_snake.front().first == _snake[i].first && _snake.front().second == _snake[i].second) {
+            std::cout << "Game Over!" << std::endl;
+            exit(EXIT_SUCCESS);
+        }
     }
 }
 
@@ -148,11 +172,19 @@ void Game::drawGrid() {
     _libraryInstance->display(_renderer);
 }
 
+#include <random>
+
 void Game::generateFood() {
-    //--- Randomly generate food within the grid ---//
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    
+    std::uniform_int_distribution<> disX(0, _gameAreaWidth - 1);
+    std::uniform_int_distribution<> disY(0, _gameAreaHeight - 1);
+
+    int x, y;
     while (true) {
-        int x = rand() % _gameAreaWidth;
-        int y = rand() % _gameAreaHeight;
+        x = disX(gen);
+        y = disY(gen);
 
         if (_gameGrid[y][x] == 0) {
             _food.first = x;
