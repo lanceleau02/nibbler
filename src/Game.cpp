@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 21:44:06 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:52:30 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ Game::Game(int gameAreaWidth, int gameAreaHeight) : _gameAreaWidth(gameAreaWidth
     }
 
     _snake.push_back(std::make_pair(gameAreaWidth / 2, gameAreaHeight / 2));
+    _snake.push_back(std::make_pair(gameAreaWidth / 2 - 1, gameAreaHeight / 2));
+    _snake.push_back(std::make_pair(gameAreaWidth / 2 - 2, gameAreaHeight / 2));
+    _snake.push_back(std::make_pair(gameAreaWidth / 2 - 3, gameAreaHeight / 2));
     
     _lastMove = std::chrono::steady_clock::now();
     
@@ -94,6 +97,10 @@ void Game::run() {
 }
 
 void Game::moveSnake() {
+    for (int i = _snake.size() - 1; i > 0; --i) {
+        _snake[i] = _snake[i - 1];  // Move body part to the position of the one in front
+    }
+    
     // Move head in the current direction
     switch (_currentDirection) {
         case UP: _snake.front().second--; break;
@@ -101,7 +108,6 @@ void Game::moveSnake() {
         case LEFT: _snake.front().first--; break;
         case RIGHT: _snake.front().first++; break;
     }
-
 }
 
 void Game::drawGrid() {
