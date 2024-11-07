@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:00:41 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 20:22:31 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:55:52 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 #include "nibbler.hpp"
 #include "ILibraries.hpp"
 
-#define SQUARE_WIDTH 50
-#define SQUARE_HEIGHT 50
+#define SQUARE_SIZE 50
+
+#define NIBBLER_GREEN	Colors(0, 255, 0, 255)
+#define NIBBLER_RED		Colors(255, 0, 0, 255)
+#define NIBBLER_BLUE	Colors(0, 0, 255, 255)
+#define NIBBLER_ORANGE	Colors(255, 165, 0, 255)
 
 class Game {
 	private:
-		std::vector<int>			_gameGrid;
-		std::deque<std::pair<int, int>>	_snake;
+		std::vector<std::vector<int>>		_gameGrid;
+		std::deque<std::pair<int, int>>		_snake;
 	
 		const int	_gameAreaWidth;
 		const int	_gameAreaHeight;
@@ -30,6 +34,7 @@ class Game {
 		void*		_handle;
 		void*		_renderer;
 		int			_currentLib;
+		int			_currentDirection;
 
 	public:
 		Game();
@@ -37,6 +42,7 @@ class Game {
 		~Game();
 
 		void	handleEvents(ILibraries& libraryInstance, void* handle, void* renderer, int currentLib);
+		void	drawGrid();
 		void	run();
 };
 
