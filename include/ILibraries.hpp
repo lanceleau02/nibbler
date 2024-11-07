@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:32:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 15:44:30 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:43:47 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class ILibraries {
 		virtual void    centerWindow(void* r = nullptr) = 0;
 		virtual void	clearWindow(void* r = nullptr) = 0;
 		virtual void	closeWindow(void* r = nullptr) = 0;
-		virtual void	createSquare(void* r = nullptr) = 0;
+		virtual void	createSquare(int x, int y, int width, int height, const Colors& color, void* r = nullptr) = 0;
 		virtual void	display(void* r = nullptr) = 0;
 		virtual	void*	createWindow() = 0;
 		

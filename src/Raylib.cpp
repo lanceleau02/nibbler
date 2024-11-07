@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 13:39:59 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:45:30 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int	Raylib::handleEvents(void* r) {
 	if (IsKeyPressed(KEY_ONE)) return ONE;
 	if (IsKeyPressed(KEY_TWO)) return TWO;
 	if (IsKeyPressed(KEY_THREE)) return THREE;
+	if (IsKeyPressed(KEY_UP)) return UP;
+	if (IsKeyPressed(KEY_DOWN)) return DOWN;
+	if (IsKeyPressed(KEY_LEFT)) return LEFT;
+	if (IsKeyPressed(KEY_RIGHT)) return RIGHT;
 	return -1;
 }
 
@@ -45,8 +49,8 @@ void	Raylib::closeWindow(void* r) {
 	CloseWindow();
 }
 
-void	Raylib::createSquare(void* r) {
-	DrawRectangle(350, 250, 100, 100, GREEN);
+void	Raylib::createSquare(int x, int y, int width, int height, const Colors& color, void* r) {
+	DrawRectangle(x, y, width, height, (Color){ static_cast<unsigned char>(color.r), static_cast<unsigned char>(color.g), static_cast<unsigned char>(color.b), static_cast<unsigned char>(color.a) });
 }
 
 void	Raylib::display(void* r) {

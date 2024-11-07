@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 13:36:50 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:43:59 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int	SFML::handleEvents(void* r) {
 		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Num1) return ONE;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Num2) return TWO;
 		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Num3) return THREE;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Up) return UP;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Down) return DOWN;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Left) return LEFT;
+		if (_event.type == sf::Event::KeyPressed && _event.key.code == sf::Keyboard::Right) return RIGHT;
 	}
 	return -1;
 }
@@ -65,11 +69,11 @@ void	SFML::closeWindow(void* r) {
 	_window->close();
 }
 
-void	SFML::createSquare(void* r) {
+void	SFML::createSquare(int x, int y, int width, int height, const Colors& color, void* r) {
 	_window = static_cast<sf::RenderWindow*>(r);
-	sf::RectangleShape square(sf::Vector2f(100.f, 100.f));
-	square.setFillColor(sf::Color::Green);
-	square.setPosition(350.f, 250.f);
+	sf::RectangleShape square(sf::Vector2f((float)width, (float)height));
+	square.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	square.setPosition((float)x, (float)y);
 	_window->draw(square);
 }
 

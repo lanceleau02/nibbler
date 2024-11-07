@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 17:46:09 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:44:23 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	game(Nibbler& nibbler) {
 	void*		handle = nullptr;
 	void*		renderer = nullptr;
 	int         currentLib = RAYLIB_LIB;
+	Colors		green(0, 255, 0, 255);
 
 	std::cout << "Press '1', '2', '3' to switch libraries or 'ESC' to quit." << std::endl;
 	openLibrary(&handle, "raylib");
@@ -102,7 +103,7 @@ void	game(Nibbler& nibbler) {
 			if (libraryInstance->isOpen(renderer)) {
 				libraryInstance->centerWindow(renderer);
 				libraryInstance->clearWindow(renderer);
-				libraryInstance->createSquare(renderer);
+				libraryInstance->createSquare(350, 250, 100, 100, green, renderer);
 				libraryInstance->display(renderer);
 			}
 		}

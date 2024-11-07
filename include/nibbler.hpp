@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 15:40:21 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:43:42 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,21 @@ struct Nibbler {
     int windowHeight;
 };
 
+struct Colors {
+    int r, g, b, a;
+    
+    Colors(int red, int green, int blue, int alpha) : r(red), g(green), b(blue), a(alpha) {};
+};
+
 enum Keys {
 	CLOSE_WINDOW,
     ONE,
     TWO,
-    THREE
+    THREE,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
 };
 
 enum Libraries {

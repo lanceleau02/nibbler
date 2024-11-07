@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:37:30 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 11:15:56 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:43:53 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class SFML : public ILibraries {
 		void    centerWindow(void* r);
 		void    clearWindow(void* r);
 		void    closeWindow(void* r);
-		void    createSquare(void* r);
+		void    createSquare(int x, int y, int width, int height, const Colors& color, void* r);
 		void	display(void* r);
 		void*	createWindow();
 };

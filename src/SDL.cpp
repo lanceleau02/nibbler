@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 13:38:45 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:43:57 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int	SDL::handleEvents(void* r) {
 		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_1) return ONE;
 		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_2) return TWO;
 		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_3) return THREE;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_UP) return UP;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_DOWN) return DOWN;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_LEFT) return LEFT;
+		if (_event.type == SDL_KEYDOWN && _event.key.keysym.sym == SDLK_RIGHT) return RIGHT;
 	}
 	return -1;
 }
@@ -61,9 +65,9 @@ void	SDL::closeWindow(void* r) {
 	SDL_Quit();
 }
 
-void	SDL::createSquare(void* r) {
-	SDL_Rect square = { 350, 250, 100, 100 };
-	SDL_SetRenderDrawColor(_renderer, 0, 255, 0, 255);
+void	SDL::createSquare(int x, int y, int width, int height, const Colors& color, void* r) {
+	SDL_Rect square = { x, y, width, height };
+	SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderFillRect(_renderer, &square);
 	SDL_RenderDrawRect(_renderer, &square);
 }
