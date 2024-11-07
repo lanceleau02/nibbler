@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 15:45:30 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:52:28 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ void	Raylib::closeWindow(void* r) {
 }
 
 void	Raylib::createSquare(int x, int y, int width, int height, const Colors& color, void* r) {
-	DrawRectangle(x, y, width, height, (Color){ static_cast<unsigned char>(color.r), static_cast<unsigned char>(color.g), static_cast<unsigned char>(color.b), static_cast<unsigned char>(color.a) });
+	unsigned char   red = static_cast<unsigned char>(color.r);
+	unsigned char   green = static_cast<unsigned char>(color.g);
+	unsigned char   blue = static_cast<unsigned char>(color.b);
+	unsigned char   alpha = static_cast<unsigned char>(color.a);
+    DrawRectangle(x, y, width, height, (Color){ red, green, blue, alpha });
 }
 
 void	Raylib::display(void* r) {
