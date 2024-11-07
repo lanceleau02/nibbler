@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 21:52:30 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:01:11 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ void Game::run() {
                 _currentLib = SFML_LIB;
                 std::cout << "Switching to SFML..." << std::endl;
                 switchLibrary(_gameAreaHeight * SQUARE_SIZE, _gameAreaHeight * SQUARE_SIZE, _libraryInstance, _handle, _renderer, "sfml");
+            } else if (eventResult == UP && _currentDirection != DOWN) {
+                _currentDirection = UP;
+            } else if (eventResult == DOWN && _currentDirection != UP) {
+                _currentDirection = DOWN;
+            } else if (eventResult == LEFT && _currentDirection != RIGHT) {
+                _currentDirection = LEFT;
+            } else if (eventResult == RIGHT && _currentDirection != LEFT) {
+                _currentDirection = RIGHT;
             }
 
             //---> Handling Snake Movement <---//
@@ -84,6 +92,8 @@ void Game::run() {
                         _gameGrid[y][x] = 0;
                 }
             }
+
+            _gameGrid[_food.second][_food.first] = 3;
             
             for (auto& snakePart : _snake) {
                 _gameGrid[snakePart.second][snakePart.first] = 1;
@@ -98,15 +108,19 @@ void Game::run() {
 
 void Game::moveSnake() {
     for (int i = _snake.size() - 1; i > 0; --i) {
-        _snake[i] = _snake[i - 1];  // Move body part to the position of the one in front
+        _snake[i] = _snake[i - 1];
     }
     
-    // Move head in the current direction
     switch (_currentDirection) {
         case UP: _snake.front().second--; break;
         case DOWN: _snake.front().second++; break;
         case LEFT: _snake.front().first--; break;
         case RIGHT: _snake.front().first++; break;
+    }
+
+    if (_snake.front().first == _food.first && _snake.front().second == _food.second) {
+        _snake.push_back(_snake.back());
+        generateFood();
     }
 }
 
@@ -141,7 +155,8 @@ void Game::generateFood() {
         int y = rand() % _gameAreaHeight;
 
         if (_gameGrid[y][x] == 0) {
-            _gameGrid[y][x] = 3;
+            _food.first = x;
+            _food.second = y;
             break;
         }
     }

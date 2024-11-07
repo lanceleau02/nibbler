@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:00:41 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 21:40:52 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:00:36 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ class Game {
 		int			_currentLib;
 		
 		std::chrono::steady_clock::time_point	_lastMove;
-		
-		const int								_moveInterval = 2;
+		std::pair<int, int>						_food;
+		const double							_moveInterval = 0.5;
 		int										_currentDirection;
 
 
