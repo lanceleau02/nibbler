@@ -1,28 +1,34 @@
-CC				=	clang++
-CFLAGS			=	-Wall -Wextra -Werror
-LDFLAGS			=	-Wl,-rpath,'/nfs/homes/laprieur/.local/lib'
-RAYLIB_LDFLAGS	=	-L /nfs/homes/laprieur/.local/lib -lraylib -lglfw -lGL -lm -lpthread -lrt -lX11 -ldl
-RAYLIB_INCLUDE	=	-I /nfs/homes/laprieur/.local/include
-SDL_LDFLAGS		=	-L /nfs/homes/laprieur/.local/lib -lSDL2 -ldl
-SDL_INCLUDE		=	-I /nfs/homes/laprieur/.local/include/SDL2
-SFML_LDFLAGS	=	-L /nfs/homes/laprieur/.local/lib -lsfml-graphics -lsfml-window -lsfml-system -ldl
-SFML_INCLUDE	=	-I /nfs/homes/laprieur/.local/include/SFML
-BINS			=	src/Raylib.so src/SDL.so src/SFML.so src/main.elf
+all:
+	@ninja -C build install
 
-all: $(BINS)
-
-%.so: %.cpp
-	@$(CC) $(CFLAGS) $(LDFLAGS) -fPIC -shared -o $@ $^ $(RAYLIB_LDFLAGS) $(SDL_LDFLAGS) $(SFML_LDFLAGS) $(RAYLIB_INCLUDE) $(SDL_INCLUDE) $(SFML_INCLUDE)
-
-src/main.elf: src/main.cpp src/Raylib.so src/SDL.so src/SFML.so
-	@$(CC) $(CFLAGS) -o $@ $^ -ldl
+setup:
+	@meson setup build --prefix=$(PWD) --bindir='' --libdir=''
 
 clean:
-	@rm -f $(BINS) *.o
+	@rm -rf nibbler libraylib.so libsdl2.so libsfml.so
+	@rm -rf build
+
+fclean: clean
+	@rm -rf nibbler
 
 re:
-	@$(MAKE) clean
+	@$(MAKE) fclean
+	@$(MAKE) setup
 	@$(MAKE) all
 
 run:
 	@./nibbler 500 500
+
+docker-build:
+	@docker build -t nibbler .
+
+docker-run:
+	@xhost +local:docker
+	@docker run --net=host --env="DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix:rw --device /dev/snd -it nibbler
+
+docker-clean:
+	@docker system prune -af
+
+docker-re:
+	@$(MAKE) docker-clean
+	@$(MAKE) docker-build

@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:37:30 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 11:45:33 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:15:56 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class SFML : public ILibraries {
 	
 	public:
 		SFML();
-		// SFML(const SFML& other);
-		// SFML& operator=(const SFML& other);
+		SFML(const SFML& other);
+		SFML& operator=(const SFML& other);
 		~SFML();
 		
 		int 	handleEvents(void* r);

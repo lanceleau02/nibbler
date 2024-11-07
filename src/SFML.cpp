@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:16:35 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 17:03:24 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:18:06 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,17 @@ SFML::SFML() : _window(nullptr) {
 	_event = sf::Event();
 }
 
-// SFML::SFML(const SFML& other) {}
+SFML::SFML(const SFML& other) : _window(other._window), _event(other._event) {
+	*this = other;
+}
 
-// SFML& SFML::operator=(const SFML& other) { return other; }
+SFML& SFML::operator=(const SFML& other) {
+	if (this != &other) {
+		_window = other._window;
+		_event = other._event;
+	}
+	return *this;
+}
 
 SFML::~SFML() {
 	if (_window) delete _window;

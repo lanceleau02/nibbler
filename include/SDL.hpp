@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 13:44:40 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:11:13 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class SDL : public ILibraries {
 
 	public:
 		SDL();
-		// SDL(const SDL& other);
-		// SDL& operator=(const SDL& other);
+		SDL(const SDL& other);
+		SDL& operator=(const SDL& other);
 		~SDL();
 		
 		int 	handleEvents(void* r);

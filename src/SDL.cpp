@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/06 17:51:42 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:19:37 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 SDL::SDL() : _window(nullptr), _renderer(nullptr) {}
 
-// SDL::SDL(const SDL& other) {}
+SDL::SDL(const SDL& other) : _window(other._window), _renderer(other._renderer), _event(other._event), _displayMode(other._displayMode) {
+	*this = other;
+}
 
-// SDL& SDL::operator=(const SDL& other) { return other; }
+SDL& SDL::operator=(const SDL& other) {
+	if (this != &other) {
+		_window = other._window;
+		_renderer = other._renderer;
+		_event = other._event;
+		_displayMode = other._displayMode;
+	}
+	return *this;
+}
 
 SDL::~SDL() {}
 
@@ -59,12 +69,12 @@ int	SDL::handleEvents(void* r) {
 void*   SDL::createWindow() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		throw std::runtime_error(std::string("SDL could not initialize! SDL_Error: ") + SDL_GetError());
-    
+	
 	_window = SDL_CreateWindow("Nibbler (SDL)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _windowWidth, _windowHeight, SDL_WINDOW_SHOWN);
 	if (!_window) {
 		SDL_Quit();
 		throw std::runtime_error(std::string("the window could not be created! SDL_Error: ") + SDL_GetError());
-    }
+	}
 
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 	if (!_renderer) {
