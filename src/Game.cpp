@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 20:59:14 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:44:06 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ Game::Game(int gameAreaWidth, int gameAreaHeight) : _gameAreaWidth(gameAreaWidth
         std::vector<int> row(gameAreaWidth, 0);
         _gameGrid.push_back(row);
     }
+
+    _snake.push_back(std::make_pair(gameAreaWidth / 2, gameAreaHeight / 2));
     
+    _lastMove = std::chrono::steady_clock::now();
+    
+    _currentDirection = RIGHT;
     _currentLib = RAYLIB_LIB;
+    
     openLibrary(&_handle, "raylib");
     createLibraryInstance_t createLibraryInstance = loadSymbol(_handle);
     
@@ -38,7 +44,7 @@ Game::~Game() {
 void Game::run() {
     while (true) {
         if (_libraryInstance) {
-
+            
             //--- Handling events ---//
             int eventResult = _libraryInstance->handleEvents(_renderer);
     
@@ -59,12 +65,43 @@ void Game::run() {
                 switchLibrary(_gameAreaHeight * SQUARE_SIZE, _gameAreaHeight * SQUARE_SIZE, _libraryInstance, _handle, _renderer, "sfml");
             }
 
+            //---> Handling Snake Movement <---//
+            auto currentTime = std::chrono::steady_clock::now();
+            std::chrono::duration<double> elapsedTime = currentTime - _lastMove;
             
+            if (elapsedTime.count() >= _moveInterval) {
+                std::cout << "Moving Snake..." << std::endl;
+                moveSnake();
+                _lastMove = currentTime;
+            }
+
+            //---> Update The position of the snake in the grid <---//
+            for (int y = 0; y < _gameAreaHeight; y++) {
+                for (int x = 0; x < _gameAreaWidth; x++) {
+                        _gameGrid[y][x] = 0;
+                }
+            }
             
-            //--- Handling Display ---//
+            for (auto& snakePart : _snake) {
+                _gameGrid[snakePart.second][snakePart.first] = 1;
+            }
+            _gameGrid[_snake.front().second][_snake.front().first] = 2;
+            
+            //---> Handling Display <---//
             drawGrid();
         }
     }
+}
+
+void Game::moveSnake() {
+    // Move head in the current direction
+    switch (_currentDirection) {
+        case UP: _snake.front().second--; break;
+        case DOWN: _snake.front().second++; break;
+        case LEFT: _snake.front().first--; break;
+        case RIGHT: _snake.front().first++; break;
+    }
+
 }
 
 void Game::drawGrid() {
@@ -89,4 +126,17 @@ void Game::drawGrid() {
     }
     
     _libraryInstance->display(_renderer);
+}
+
+void Game::generateFood() {
+    //--- Randomly generate food within the grid ---//
+    while (true) {
+        int x = rand() % _gameAreaWidth;
+        int y = rand() % _gameAreaHeight;
+
+        if (_gameGrid[y][x] == 0) {
+            _gameGrid[y][x] = 3;
+            break;
+        }
+    }
 }

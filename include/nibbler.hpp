@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 20:51:49 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:17:11 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <termios.h>
 #include <vector>
 #include <deque>
+#include <chrono>
 
 struct Colors {
     int r, g, b, a;

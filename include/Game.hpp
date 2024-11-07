@@ -6,7 +6,7 @@
 /*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:00:41 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 20:55:52 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/07 21:40:52 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 class Game {
 	private:
-		std::vector<std::vector<int>>		_gameGrid;
-		std::deque<std::pair<int, int>>		_snake;
+		std::vector<std::vector<int>>			_gameGrid;
+		std::deque<std::pair<int, int>>			_snake;
 	
 		const int	_gameAreaWidth;
 		const int	_gameAreaHeight;
@@ -34,7 +34,12 @@ class Game {
 		void*		_handle;
 		void*		_renderer;
 		int			_currentLib;
-		int			_currentDirection;
+		
+		std::chrono::steady_clock::time_point	_lastMove;
+		
+		const int								_moveInterval = 2;
+		int										_currentDirection;
+
 
 	public:
 		Game();
@@ -43,6 +48,8 @@ class Game {
 
 		void	handleEvents(ILibraries& libraryInstance, void* handle, void* renderer, int currentLib);
 		void	drawGrid();
+		void	moveSnake();
+		void	generateFood();
 		void	run();
 };
 
