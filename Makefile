@@ -17,7 +17,7 @@ re:
 	@$(MAKE) all
 
 run:
-	@./nibbler 500 500
+	@./nibbler 10 10
 
 docker-build:
 	@docker build -t nibbler .

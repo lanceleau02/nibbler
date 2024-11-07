@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ILibraries.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:32:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 15:43:47 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:17:39 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ILIBRARIES_HPP
-#define ILIBRARIES_HPP
+#pragma once
 
 #include "nibbler.hpp"
 
@@ -37,5 +36,3 @@ class ILibraries {
 };
 
 using createLibraryInstance_t = ILibraries* (*)();
-
-#endif
