@@ -22,6 +22,8 @@ Game::Game(int gameAreaWidth, int gameAreaHeight) :	_currentLib(RAYLIB_LIB),
 	_windowHeight = gameAreaHeight * SQUARE_SIZE;
 	_windowWidth = gameAreaWidth * SQUARE_SIZE;	
 
+	_justMoved = false;
+
 	openLibrary(&_handle, "raylib");
 	createLibraryInstance_t createLibraryInstance = loadSymbol(_handle);
 	if (createLibraryInstance) {
@@ -143,6 +145,8 @@ void	Game::moveSnake() {
 			exit(EXIT_SUCCESS);
 		}
 	}
+
+	_justMoved = false;
 }
 
 void	Game::run() {
@@ -164,14 +168,22 @@ void	Game::run() {
 				_currentLib = SFML_LIB;
 				std::cout << "Switching to SFML..." << std::endl;
 				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sfml");
-			} else if (eventResult == UP && _currentDirection != DOWN)
+			} else if (eventResult == UP && _currentDirection != DOWN) {
 				_currentDirection = UP;
-			else if (eventResult == DOWN && _currentDirection != UP)
+				_justMoved = true;
+			}
+			else if (eventResult == DOWN && _currentDirection != UP && !_justMoved) {
 				_currentDirection = DOWN;
-			else if (eventResult == LEFT && _currentDirection != RIGHT)
+				_justMoved = true;
+			}
+			else if (eventResult == LEFT && _currentDirection != RIGHT && !_justMoved) {
 				_currentDirection = LEFT;
-			else if (eventResult == RIGHT && _currentDirection != LEFT)
+				_justMoved = true;
+			}
+			else if (eventResult == RIGHT && _currentDirection != LEFT && !_justMoved) {
 				_currentDirection = RIGHT;
+				_justMoved = true;
+			}
 
 			auto currentTime = std::chrono::steady_clock::now();
 			std::chrono::duration<double> elapsedTime = currentTime - _lastMove;

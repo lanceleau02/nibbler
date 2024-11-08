@@ -20,12 +20,13 @@ class Game {
 	private:
 		int										_currentLib;
 		int										_currentDirection;
+		int										_windowWidth;
+		int										_windowHeight;
+		bool									_justMoved;
 		void*									_renderer;
 		void*									_handle;
 		const int								_gameAreaWidth;
 		const int								_gameAreaHeight;
-		int										_windowWidth;
-		int										_windowHeight;
 		const double							_moveInterval;
 		ILibraries*								_libraryInstance;
 		std::pair<int, int>						_food;
