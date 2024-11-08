@@ -24,6 +24,8 @@ class Game {
 		void*									_handle;
 		const int								_gameAreaWidth;
 		const int								_gameAreaHeight;
+		int										_windowWidth;
+		int										_windowHeight;
 		const double							_moveInterval;
 		ILibraries*								_libraryInstance;
 		std::pair<int, int>						_food;

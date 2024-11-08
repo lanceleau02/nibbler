@@ -19,12 +19,15 @@ Game::Game(int gameAreaWidth, int gameAreaHeight) :	_currentLib(RAYLIB_LIB),
 													_moveInterval(0.5),
 													_food({0, 0}),
 													_lastMove(std::chrono::steady_clock::now()) {
+	_windowHeight = gameAreaHeight * SQUARE_SIZE;
+	_windowWidth = gameAreaWidth * SQUARE_SIZE;	
+
 	openLibrary(&_handle, "raylib");
 	createLibraryInstance_t createLibraryInstance = loadSymbol(_handle);
 	if (createLibraryInstance) {
 		_libraryInstance = createLibraryInstance();
-		_libraryInstance->setWindowWidth(gameAreaWidth * SQUARE_SIZE);
-		_libraryInstance->setWindowHeight(gameAreaHeight * SQUARE_SIZE);
+		_libraryInstance->setWindowWidth(_windowWidth);
+		_libraryInstance->setWindowHeight(_windowHeight);
 		_renderer = _libraryInstance->createWindow();
 	}
 	for (int i = 0; i < gameAreaHeight; i++) {
@@ -152,15 +155,15 @@ void	Game::run() {
 			} else if (_currentLib != RAYLIB_LIB && (eventResult == '1' || eventResult == ONE)) {
 				_currentLib = RAYLIB_LIB;
 				std::cout << "Switching to Raylib..." << std::endl;
-				switchLibrary(_gameAreaHeight * SQUARE_SIZE, _gameAreaHeight * SQUARE_SIZE, _libraryInstance, _handle, _renderer, "raylib");
+				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "raylib");
 			} else if (_currentLib != SDL_LIB && (eventResult == '2' || eventResult == TWO)) {
 				_currentLib = SDL_LIB;
 				std::cout << "Switching to SDL..." << std::endl;
-				switchLibrary(_gameAreaHeight * SQUARE_SIZE, _gameAreaHeight * SQUARE_SIZE, _libraryInstance, _handle, _renderer, "sdl2");
+				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sdl2");
 			} else if (_currentLib != SFML_LIB && (eventResult == '3' || eventResult == THREE)) {
 				_currentLib = SFML_LIB;
 				std::cout << "Switching to SFML..." << std::endl;
-				switchLibrary(_gameAreaHeight * SQUARE_SIZE, _gameAreaHeight * SQUARE_SIZE, _libraryInstance, _handle, _renderer, "sfml");
+				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sfml");
 			} else if (eventResult == UP && _currentDirection != DOWN)
 				_currentDirection = UP;
 			else if (eventResult == DOWN && _currentDirection != UP)
