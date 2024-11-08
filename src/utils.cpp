@@ -40,7 +40,7 @@ void	parsing(Nibbler& nibbler, char* w, char* h) {
 		!(height >> heightValue) || !(height.eof()) ||
 		widthValue < 0 || widthValue < MIN_WIDTH || widthValue > MAX_WIDTH ||
 		heightValue < 0 || heightValue < MIN_HEIGHT || heightValue > MAX_HEIGHT)
-		throw UsageException("invalid area values.", "5 ≤ WIDTH ≤ 20 || 5 ≤ HEIGHT ≤ 20");
+		throw UsageException("invalid area values.", "6 ≤ WIDTH ≤ 20 || 6 ≤ HEIGHT ≤ 20");
 	nibbler.windowWidth = widthValue;
 	nibbler.windowHeight = heightValue;
 }

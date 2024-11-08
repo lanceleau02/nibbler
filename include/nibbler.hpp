@@ -35,8 +35,8 @@
 #define NIBBLER_BLUE	Colors(0, 0, 255, 255)
 #define NIBBLER_ORANGE	Colors(255, 165, 0, 255)
 
-#define MIN_WIDTH	5
-#define MIN_HEIGHT	5
+#define MIN_WIDTH	6
+#define MIN_HEIGHT	6
 #define MAX_WIDTH	20
 #define MAX_HEIGHT	20
 
