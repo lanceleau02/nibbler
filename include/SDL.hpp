@@ -6,12 +6,11 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:49:16 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 15:43:51 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:55:53 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SDL_HPP
-#define SDL_HPP
+#pragma once
 
 #include "ILibraries.hpp"
 
@@ -39,5 +38,3 @@ class SDL : public ILibraries {
 		void	display(void* r);
 		void*	createWindow();
 };
-
-#endif

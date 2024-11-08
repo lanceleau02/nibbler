@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ILibraries.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:32:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 20:17:39 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:53:31 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ class ILibraries {
 		void			setWindowWidth(int width) { _windowWidth = width; }
 		void			setWindowHeight(int height) { _windowHeight = height; }
 };
-
-using createLibraryInstance_t = ILibraries* (*)();

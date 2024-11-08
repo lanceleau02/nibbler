@@ -6,12 +6,11 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 19:37:30 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 15:43:53 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:56:07 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SFML_HPP
-#define SFML_HPP
+#pragma once
 
 #include "ILibraries.hpp"
 
@@ -37,5 +36,3 @@ class SFML : public ILibraries {
 		void	display(void* r);
 		void*	createWindow();
 };
-
-#endif

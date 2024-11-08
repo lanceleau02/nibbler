@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:16:52 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/07 22:08:28 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:48:02 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Game.hpp"
+#include "../include/nibbler.hpp"
 
 void	openLibrary(void** handle, const std::string& library) {
 	std::cout << "Opening the " << library << " library..." << std::endl;

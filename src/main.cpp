@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/07 20:24:54 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/08 10:52:55 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/nibbler.hpp"
-#include "../include/Game.hpp"
 
 int main(int argc, char** argv) {
 	try {
 		if (argc != 3)
 			throw UsageException("invalid number of arguments.", "./nibbler <width> <height>");
-		Nibbler     nibbler;
+		Nibbler nibbler;
 		parsing(nibbler, argv[1], argv[2]);
 		Game game(nibbler.windowWidth, nibbler.windowHeight);
 		game.run();
