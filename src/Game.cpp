@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/08 10:23:08 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:47:28 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ Game::Game(int gameAreaWidth, int gameAreaHeight) :	_currentLib(RAYLIB_LIB),
 	_snake.push_back(std::make_pair(gameAreaWidth / 2 - 1, gameAreaHeight / 2));
 	_snake.push_back(std::make_pair(gameAreaWidth / 2 - 2, gameAreaHeight / 2));
 	_snake.push_back(std::make_pair(gameAreaWidth / 2 - 3, gameAreaHeight / 2));
+    generateFood();
 }
 
 Game::Game(const Game& other) : _currentLib(other._currentLib),
