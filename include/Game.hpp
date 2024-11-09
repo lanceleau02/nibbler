@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:00:41 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/08 10:56:37 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:07:05 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ class Game {
 		std::deque<std::pair<int, int>>			_snake;
 		std::chrono::steady_clock::time_point	_lastMove;
 
-	public:
 		Game();
-		Game(int gameAreaWidth, int gameAreaHeight);
 		Game(const Game& other);
 		Game& operator=(const Game& other);
+        
+	public:
+		Game(int gameAreaWidth, int gameAreaHeight);
 		~Game();
 
 		void	drawGrid();

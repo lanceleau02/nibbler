@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:39:31 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/08 10:57:18 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:59:27 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,18 @@
 #include <random>
 
 #define SQUARE_SIZE		50
+#define MIN_WIDTH	    6
+#define MIN_HEIGHT	    6
+#define MAX_WIDTH	    20
+#define MAX_HEIGHT	    20
 
 #define NIBBLER_GREEN	Colors(0, 255, 0, 255)
 #define NIBBLER_RED		Colors(255, 0, 0, 255)
 #define NIBBLER_BLUE	Colors(0, 0, 255, 255)
 #define NIBBLER_ORANGE	Colors(255, 165, 0, 255)
 
-#define MIN_WIDTH	6
-#define MIN_HEIGHT	6
-#define MAX_WIDTH	20
-#define MAX_HEIGHT	20
-
-struct Nibbler {
-	int windowWidth;
-	int windowHeight;
-};
+extern int  gGameAreaWidth;
+extern int  gGameAreaHeight;
 
 struct Colors {
 	int r, g, b, a;
@@ -91,4 +88,4 @@ using createLibraryInstance_t = ILibraries* (*)();
 createLibraryInstance_t	loadSymbol(void* handle);
 void					openLibrary(void** handle, const std::string& library);
 void					switchLibrary(int windowWidth, int windowHeight, ILibraries*& libraryInstance, void*& handle, void*& renderer, const std::string& libraryName);
-void					parsing(Nibbler& nibbler, char* w, char* h);
+void					parsing(char* w, char* h);

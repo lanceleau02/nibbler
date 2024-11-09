@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/08 11:47:28 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:06:55 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,19 @@
 
 Game::Game(int gameAreaWidth, int gameAreaHeight) :	_currentLib(RAYLIB_LIB),
 													_currentDirection(RIGHT),
+													_windowWidth(gameAreaWidth * SQUARE_SIZE),
+													_windowHeight(gameAreaHeight * SQUARE_SIZE),
+													_justMoved(false),
 													_gameAreaWidth(gameAreaWidth), 
 													_gameAreaHeight(gameAreaHeight),
 													_moveInterval(0.5),
 													_food({0, 0}),
 													_lastMove(std::chrono::steady_clock::now()) {
-	_windowHeight = gameAreaHeight * SQUARE_SIZE;
-	_windowWidth = gameAreaWidth * SQUARE_SIZE;	
-
-	_justMoved = false;
-
 	openLibrary(&_handle, "raylib");
 	createLibraryInstance_t createLibraryInstance = loadSymbol(_handle);
 	if (createLibraryInstance) {
 		_libraryInstance = createLibraryInstance();
-		_libraryInstance->setWindowWidth(_windowWidth);
-		_libraryInstance->setWindowHeight(_windowHeight);
-		_renderer = _libraryInstance->createWindow();
+		_renderer = _libraryInstance->createWindow(_windowWidth, _windowHeight);
 	}
 	for (int i = 0; i < gameAreaHeight; i++) {
 		std::vector<int> row(gameAreaWidth, 0);
@@ -40,37 +36,7 @@ Game::Game(int gameAreaWidth, int gameAreaHeight) :	_currentLib(RAYLIB_LIB),
 	_snake.push_back(std::make_pair(gameAreaWidth / 2 - 1, gameAreaHeight / 2));
 	_snake.push_back(std::make_pair(gameAreaWidth / 2 - 2, gameAreaHeight / 2));
 	_snake.push_back(std::make_pair(gameAreaWidth / 2 - 3, gameAreaHeight / 2));
-    generateFood();
-}
-
-Game::Game(const Game& other) : _currentLib(other._currentLib),
-								_currentDirection(other._currentDirection),
-								_renderer(other._renderer),
-								_handle(other._handle),
-								_gameAreaWidth(other._gameAreaWidth),
-								_gameAreaHeight(other._gameAreaHeight),
-								_moveInterval(other._moveInterval),
-								_libraryInstance(other._libraryInstance),
-								_food(other._food),
-								_gameGrid(other._gameGrid),
-								_snake(other._snake),
-								_lastMove(other._lastMove) {
-	*this = other;
-}
-
-Game&	Game::operator=(const Game& other) {
-	if (this != &other) {
-		_currentLib = other._currentLib;
-		_currentDirection = other._currentDirection;
-		_renderer = other._renderer;
-		_handle = other._handle;
-		_libraryInstance = other._libraryInstance;
-		_food = other._food;
-		_gameGrid = other._gameGrid;
-		_snake = other._snake;
-		_lastMove = other._lastMove;
-	}
-	return *this;
+	generateFood();
 }
 
 Game::~Game() {
@@ -82,18 +48,18 @@ void	Game::drawGrid() {
 	if (!_libraryInstance->isOpen(_renderer))
 		return;
 
-	_libraryInstance->centerWindow(_renderer);
+	_libraryInstance->centerWindow(_windowWidth, _windowHeight, _renderer);
 	_libraryInstance->clearWindow(_renderer);
 	for (int y = 0; y < _gameAreaHeight; y++) {
 		for (int x = 0; x < _gameAreaWidth; x++) {
 			if (_gameGrid[y][x] == 0)
-				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, NIBBLER_GREEN, _renderer);
+				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, NIBBLER_GREEN, _renderer);
 			else if (_gameGrid[y][x] == 1)
-				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, NIBBLER_BLUE, _renderer);
+				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, NIBBLER_BLUE, _renderer);
 			else if (_gameGrid[y][x] == 2)
-				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, NIBBLER_RED, _renderer);
+				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, NIBBLER_RED, _renderer);
 			else if (_gameGrid[y][x] == 3)
-				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, NIBBLER_ORANGE, _renderer);
+				_libraryInstance->createSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, NIBBLER_ORANGE, _renderer);
 		}
 	}
 	_libraryInstance->display(_renderer);

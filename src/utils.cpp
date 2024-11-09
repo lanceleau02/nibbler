@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:16:52 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/08 10:48:02 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:59:48 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ createLibraryInstance_t	loadSymbol(void* handle) {
 	return createLibraryInstance;
 }
 
-void	parsing(Nibbler& nibbler, char* w, char* h) {
+void	parsing(char* w, char* h) {
 	std::istringstream	width(w);
 	std::istringstream	height(h);
 	int					widthValue;
@@ -40,9 +40,9 @@ void	parsing(Nibbler& nibbler, char* w, char* h) {
 		!(height >> heightValue) || !(height.eof()) ||
 		widthValue < 0 || widthValue < MIN_WIDTH || widthValue > MAX_WIDTH ||
 		heightValue < 0 || heightValue < MIN_HEIGHT || heightValue > MAX_HEIGHT)
-		throw UsageException("invalid area values.", "6 ≤ WIDTH ≤ 20 || 6 ≤ HEIGHT ≤ 20");
-	nibbler.windowWidth = widthValue;
-	nibbler.windowHeight = heightValue;
+		throw UsageException("invalid area values.", "6 ≤ WIDTH ≤ 20 | 6 ≤ HEIGHT ≤ 20");
+    gGameAreaWidth = widthValue;
+    gGameAreaHeight = heightValue;
 }
 
 void	switchLibrary(int windowWidth, int windowHeight, ILibraries*& libraryInstance, void*& handle, void*& renderer, const std::string& libraryName) {
@@ -59,8 +59,6 @@ void	switchLibrary(int windowWidth, int windowHeight, ILibraries*& libraryInstan
 	createLibraryInstance_t createLibraryInstance = loadSymbol(handle);
 	if (createLibraryInstance) {
 		libraryInstance = createLibraryInstance();
-		libraryInstance->setWindowWidth(windowWidth);
-		libraryInstance->setWindowHeight(windowHeight);
-		renderer = libraryInstance->createWindow();
+		renderer = libraryInstance->createWindow(windowWidth, windowHeight);
 	}
 }
