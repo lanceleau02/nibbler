@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:23:56 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/09 17:47:12 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:30:36 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	gGameAreaWidth = 0;
 int	gGameAreaHeight = 0;
-/* int	gWindowWidth = 0;
-int	gWindowHeight = 0; */
 
 int main(int argc, char** argv) {
 	try {
 		if (argc != 3)
 			throw UsageException("invalid number of arguments.", "./nibbler <width> <height>");
-		// Nibbler nibbler;
-		parsing(/* nibbler,  */argv[1], argv[2]);
-		Game game(/* nibbler.windowWidth, nibbler.windowHeight */gGameAreaWidth, gGameAreaHeight);
+		parsing(argv[1], argv[2]);
+		Game game(gGameAreaWidth, gGameAreaHeight);
 		game.run();
 	} catch (const UsageException& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
