@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:08:22 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/09 18:01:37 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:04:55 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Raylib::Raylib() {}
 
 Raylib::~Raylib() {}
 
-int	Raylib::handleEvents(void* r) {
+int	Raylib::handleEvents(void*) {
 	if (IsKeyPressed(KEY_ESCAPE) || WindowShouldClose()) return CLOSE_WINDOW;
 	if (IsKeyPressed(KEY_ONE)) return ONE;
 	if (IsKeyPressed(KEY_TWO)) return TWO;
@@ -28,28 +28,28 @@ int	Raylib::handleEvents(void* r) {
 	return -1;
 }
 
-bool	Raylib::isOpen(void* r) {
+bool	Raylib::isOpen(void*) {
 	return !WindowShouldClose();
 }
 
-void    Raylib::centerWindow(int width, int height, void* r) {
+void    Raylib::centerWindow(int width, int height, void*) {
 	int monitor = GetCurrentMonitor();
 	int monitorWidth = GetMonitorWidth(monitor);
 	int monitorHeight = GetMonitorHeight(monitor);
 	SetWindowPosition((int)(monitorWidth / 2) - (int)(width / 2), (int)(monitorHeight / 2) - (int)(height / 2));
 }
 
-void	Raylib::clearWindow(void* r) {
+void	Raylib::clearWindow(void*) {
 	BeginDrawing();
 	ClearBackground(BLACK);
 }
 
-void	Raylib::closeWindow(void* r) {
+void	Raylib::closeWindow(void*) {
 	EndDrawing();
 	CloseWindow();
 }
 
-void	Raylib::createSquare(int x, int y, int size, const Colors& color, void* r) {
+void	Raylib::createSquare(int x, int y, int size, const Colors& color, void*) {
 	unsigned char   red = static_cast<unsigned char>(color.r);
 	unsigned char   green = static_cast<unsigned char>(color.g);
 	unsigned char   blue = static_cast<unsigned char>(color.b);
@@ -57,7 +57,7 @@ void	Raylib::createSquare(int x, int y, int size, const Colors& color, void* r) 
 	DrawRectangle(x, y, size, size, (Color){ red, green, blue, alpha });
 }
 
-void	Raylib::display(void* r) {
+void	Raylib::display(void*) {
 	EndDrawing();
 }
 

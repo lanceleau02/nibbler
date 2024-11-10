@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 20:15:19 by laprieur          #+#    #+#             */
-/*   Updated: 2024/11/09 18:07:59 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:05:26 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ SDL::SDL() : _window(nullptr), _renderer(nullptr) {}
 
 SDL::~SDL() {}
 
-int	SDL::handleEvents(void* r) {
+int	SDL::handleEvents(void*) {
 	if (SDL_PollEvent(&_event) != 0) {
 		if (_event.type == SDL_QUIT) return CLOSE_WINDOW;
 		if (_event.type == SDL_KEYDOWN) {
@@ -36,35 +36,35 @@ int	SDL::handleEvents(void* r) {
 	return -1;
 }
 
-bool	SDL::isOpen(void* r) {
+bool	SDL::isOpen(void*) {
 	return (_window != nullptr);
 }
 
-void	SDL::centerWindow(int width, int height, void* r) {
+void	SDL::centerWindow(int width, int height, void*) {
 	SDL_GetDesktopDisplayMode(0, &_displayMode);
 	SDL_SetWindowPosition(_window, (_displayMode.w - width) / 2, (_displayMode.h - height) / 2);
 	SDL_ShowWindow(_window);
 }
 
-void	SDL::clearWindow(void* r) {
+void	SDL::clearWindow(void*) {
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(_renderer);
 }
 
-void	SDL::closeWindow(void* r) {
+void	SDL::closeWindow(void*) {
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
 	SDL_Quit();
 }
 
-void	SDL::createSquare(int x, int y, int size, const Colors& color, void* r) {
+void	SDL::createSquare(int x, int y, int size, const Colors& color, void*) {
 	SDL_Rect square = { x, y, size, size };
 	SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderFillRect(_renderer, &square);
 	SDL_RenderDrawRect(_renderer, &square);
 }
 
-void    SDL::display(void* r) {
+void    SDL::display(void*) {
 	SDL_RenderPresent(_renderer);
 }
 

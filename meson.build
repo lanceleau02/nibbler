@@ -1,4 +1,4 @@
-project('nibbler', 'cpp', cpp_args : ['-Wall', '-Wextra', '-Werror'])
+project('nibbler', 'cpp', default_options : ['warning_level=2', 'werror=true'])
 
 subdir('src')
 
