@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Game.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsebille <hsebille@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/10 17:20:00 by hsebille         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:02:28 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,33 +119,57 @@ void	Game::run() {
 	while (true) {
 		if (_libraryInstance) {
 			int eventResult = _libraryInstance->handleEvents(_renderer);
-			if (eventResult == CLOSE_WINDOW) {
-				std::cout << "Quitting..." << std::endl;
-				break;
-			} else if (_currentLib != RAYLIB_LIB && (eventResult == '1' || eventResult == ONE)) {
-				_currentLib = RAYLIB_LIB;
-				std::cout << "Switching to Raylib..." << std::endl;
-				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "raylib");
-			} else if (_currentLib != SDL_LIB && (eventResult == '2' || eventResult == TWO)) {
-				_currentLib = SDL_LIB;
-				std::cout << "Switching to SDL..." << std::endl;
-				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sdl2");
-			} else if (_currentLib != SFML_LIB && (eventResult == '3' || eventResult == THREE)) {
-				_currentLib = SFML_LIB;
-				std::cout << "Switching to SFML..." << std::endl;
-				switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sfml");
-			} else if (eventResult == UP && _currentDirection != DOWN && !_justMoved) {
-				_currentDirection = UP;
-				_justMoved = true;
-			} else if (eventResult == DOWN && _currentDirection != UP && !_justMoved) {
-				_currentDirection = DOWN;
-				_justMoved = true;
-			} else if (eventResult == LEFT && _currentDirection != RIGHT && !_justMoved) {
-				_currentDirection = LEFT;
-				_justMoved = true;
-			} else if (eventResult == RIGHT && _currentDirection != LEFT && !_justMoved) {
-				_currentDirection = RIGHT;
-				_justMoved = true;
+			switch (eventResult) {
+				case CLOSE_WINDOW:
+					std::cout << "Quitting..." << std::endl;
+					return;
+				case ONE:
+					if (_currentLib != RAYLIB_LIB) {
+						_currentLib = RAYLIB_LIB;
+						std::cout << "Switching to Raylib..." << std::endl;
+						switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "raylib");
+					}
+					break;
+				case TWO:
+					if (_currentLib != SDL_LIB) {
+						_currentLib = SDL_LIB;
+						std::cout << "Switching to SDL..." << std::endl;
+						switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sdl2");
+					}
+					break;
+				case THREE:
+					if (_currentLib != SFML_LIB) {
+						_currentLib = SFML_LIB;
+						std::cout << "Switching to SFML..." << std::endl;
+						switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sfml");
+					}
+					break;
+				case UP:
+					if (_currentDirection != DOWN && !_justMoved) {
+						_currentDirection = UP;
+						_justMoved = true;
+					}
+					break;
+				case DOWN:
+					if (_currentDirection != UP && !_justMoved) {
+						_currentDirection = DOWN;
+						_justMoved = true;
+					}
+					break;
+				case LEFT:
+					if (_currentDirection != RIGHT && !_justMoved) {
+						_currentDirection = LEFT;
+						_justMoved = true;
+					}
+					break;
+				case RIGHT:
+					if (_currentDirection != LEFT && !_justMoved) {
+						_currentDirection = RIGHT;
+						_justMoved = true;
+					}
+					break;
+				default:
+					break;
 			}
 
 			auto currentTime = std::chrono::steady_clock::now();
