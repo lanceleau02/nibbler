@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:03:45 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/16 16:02:28 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/24 15:07:35 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,14 @@ void	Game::moveSnake() {
 	_justMoved = false;
 }
 
+void    Game::handleLibrarySwitch(std::string libName) {
+	if (libName == "raylib") _currentLib = RAYLIB_LIB;
+	if (libName == "sdl2") _currentLib = SDL_LIB;
+	if (libName == "sfml") _currentLib = SFML_LIB;
+	std::cout << "Switching to " + libName + "..." << std::endl;
+	switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, libName);
+}
+
 void	Game::run() {
 	while (true) {
 		if (_libraryInstance) {
@@ -124,25 +132,13 @@ void	Game::run() {
 					std::cout << "Quitting..." << std::endl;
 					return;
 				case ONE:
-					if (_currentLib != RAYLIB_LIB) {
-						_currentLib = RAYLIB_LIB;
-						std::cout << "Switching to Raylib..." << std::endl;
-						switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "raylib");
-					}
+					if (_currentLib != RAYLIB_LIB) handleLibrarySwitch("raylib");
 					break;
 				case TWO:
-					if (_currentLib != SDL_LIB) {
-						_currentLib = SDL_LIB;
-						std::cout << "Switching to SDL..." << std::endl;
-						switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sdl2");
-					}
+					if (_currentLib != SDL_LIB) handleLibrarySwitch("sdl2");
 					break;
 				case THREE:
-					if (_currentLib != SFML_LIB) {
-						_currentLib = SFML_LIB;
-						std::cout << "Switching to SFML..." << std::endl;
-						switchLibrary(_windowWidth, _windowHeight, _libraryInstance, _handle, _renderer, "sfml");
-					}
+					if (_currentLib != SFML_LIB) handleLibrarySwitch("sfml");
 					break;
 				case UP:
 					if (_currentDirection != DOWN && !_justMoved) {

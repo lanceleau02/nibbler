@@ -6,7 +6,7 @@
 /*   By: laprieur <laprieur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:00:41 by hsebille          #+#    #+#             */
-/*   Updated: 2024/11/09 18:07:05 by laprieur         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:50:03 by laprieur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ class Game {
 		void	drawGrid();
 		void	generateFood();
 		void	moveSnake();
+        void    handleLibrarySwitch(std::string libName);
 		void	run();
 };
